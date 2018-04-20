@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/19 17:31:21 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/20 16:59:15 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,69 +15,48 @@
 # define RTV1_H
 
 # include "../minilibx_macos/mlx.h"
-# include <math.h>
 # include "../libft/libft.h"
-# include <fcntl.h>
 # include "keycode.h"
+# include <math.h>
+# include <fcntl.h>
 # include <pthread.h>
-#define MAX_LEN 1000
-# define MAX_WID 1000
-# define MID_WID (MAX_WID / 2)
-# define MINX f->mlx.minx
-# define MINY f->mlx.miny
-# define MAXX f->mlx.maxx
-# define MAXY f->mlx.maxy
-# define MOTION 6
-# define NB_FRAC 10
+# define MAX_H 1000
+# define MAX_W 1000
+# define MID_W (MAX_W / 2)
+# define MID_H (MAX_H / 2)
+# define THREADS 8
 
-/*
+
 typedef struct	s_col
 {
-	int			red;
-	int			green;
-	int			blue;
-	int			val;
-	int			sw1;
-	int			sw2;
-	double		coef;
+	double		red;
+	double		green;
+	double		blue;
 }				t_col;
 
-typedef struct	s_pos
+typedef struct	s_vec
 {
 	double		x;
 	double		y;
-}				t_pos;
+ 	double		z;
+}				t_vec;
 
-typedef struct	s_tree
+typedef struct	s_ray
 {
-	int			iter;
-	int			on;
-	double		size1;
-	double		size2;
-	t_col		col;
-}				t_tree;
+ 	t_vec		dir;
+ 	t_vec		ori;
+}				t_ray;
 
-typedef struct	s_mouse
+typedef struct	s_light
 {
-	int			on;
-	int			zoom;
-	double		x;
-	double		y;
-}				t_mouse;
+	t_vec		ori;
+ 	t_vec		intens;
+}				t_light;
 
-typedef struct	s_frac
+typedef struct	s_rot
 {
-	int			type;
-	double		max_iter;
-	double		freq;
-	double		constr;
-	double		consti;
-	double		real;
-	double		img;
-	double		man;
-	t_col		col;
-	t_tree		tree;
-}				t_frac;
+ 	t_vec		angle;
+}				t_rot;
 
 typedef struct	s_img
 {
@@ -90,42 +69,39 @@ typedef struct	s_img
 
 typedef struct	s_mlx
 {
-	int			color;
 	void		*mlx_ptr;
 	void		*win;
-	double		minx;
-	double		miny;
-	double		maxx;
-	double		maxy;
 	t_img		img;
 }				t_mlx;
 
 typedef struct	s_env
 {
-	t_frac		frac;
+	t_rot		rot;
+	t_light		light;
 	t_mlx		mlx;
-	t_mouse		mouse;
 }				t_env;
-*/
+
+typedef struct	s_th
+{
+	t_env		*rt;
+	int			part;
+}				t_th;
+
 /*
 **  Initialize environment.
 */
-
 
 /*
 **  Functions that take care of tracing.
 */
 
-
 /*
-**  Functions of differents fractals.
+**  Functions of differents scenes.
 */
-
 
 /*
 **  Functions that take care of events.
 */
-
 
 /*
 ** Tried to implement multi-threading
@@ -133,11 +109,6 @@ typedef struct	s_env
 ** void     init_thread(t_env *f);
 ** void     *threaderize(void *th);
 **
-** typedef struct		s_th
-**{
-**	t_env			*f;
-**	int				part;
-**}                    t_th;
 */
 
 #endif
