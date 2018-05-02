@@ -22,7 +22,7 @@ OBJECTS		=   $(addprefix build/, $(FILENAMES:.c=.o))
 
 FLAGS		=	-O2
 
-LOADIR		=	/Users/rlossy/unitest/load
+LOADIR		=	/Users/rlossy/extra/Progress_Bar-for-Makefile
 LOADF		=	$(LOADIR)/loading.sh
 
 .PHONY: all clean fclean re
