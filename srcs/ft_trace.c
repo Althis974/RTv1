@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_get_print_len.c                               .::    .:/ .      .::   */
+/*   ft_trace.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
+/*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/20 10:10:42 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/02 14:34:46 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/03 15:26:27 by rlossy       #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/03 16:58:20 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/rtv1.h"
 
-void	ft_get_print_len(uintmax_t n, uintmax_t base, size_t *len)
+int		ft_trace(t_env *rt, int part)
 {
-	char	*hexa;
+	int		x;
+	int		y;
+	int		stop;
+	int		start;
 
-	hexa = "0123456789abcdef";
-	if (*len == 0)
-		*len += 1;
-	if (n >= base)
+	start = (MAX_H / THREADS) * part;
+	stop = (MAX_H / THREADS) * (part + 1);
+	y = start - 1;
+	while (++y < stop)
 	{
-		*len += 1;
-		ft_get_print_len(n / base, base, len);
+		x = -1;
+		while (++x < MAX_W)
+		{
+//			ft_set_pixel(rt, x, y);
+		}
 	}
+	return (0);
 }

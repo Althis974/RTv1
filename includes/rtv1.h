@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/26 17:22:36 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/03 16:58:20 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -74,7 +74,7 @@ typedef struct	s_obj
 /*
 **	[Light structure]
 **
-**	data	=	feature of  light
+**	data	=	feature of light
 */
 
 typedef struct	s_light
@@ -143,7 +143,7 @@ typedef struct	s_env
 }				t_env;
 
 /*
-**	[Multi-thread structure] (might not be kept)
+**	[Multi-thread structure]
 **
 **	*rt		=	pointer on env structure
 **	part	=	number of thread
@@ -159,9 +159,15 @@ typedef struct	s_th
 **  Initialize environment.
 */
 
+void			ft_initialization(t_env *rt);
+int 			ft_env_init(t_env *rt);
+int 			ft_create(t_env *rt);
+
 /*
 **  Functions that take care of tracing.
 */
+
+int				ft_trace(t_env *rt, int part);
 
 /*
 **  Functions of differents scenes.
@@ -172,10 +178,10 @@ typedef struct	s_th
 */
 
 /*
-** Tried to implement multi-threading
-**
-** void     init_thread(t_env *f);
-** void     *threaderize(void *th);
+** Try to implement multi-threading
 */
+
+void			init_thread(t_env *rt);
+void			*threaderize(void *th);
 
 #endif
