@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 16:58:20 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/04 13:55:57 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -96,6 +96,19 @@ typedef struct	s_cam
 }				t_cam;
 
 /*
+**	[Rotation structure]
+**
+**	ori		=	origin of rotation
+**	dir		=	direction of rotation
+*/
+
+typedef struct	s_rot
+{
+	t_vec		ori;
+	t_vec		dir;
+}				t_rot;
+
+/*
 **	[Image structure]
 **
 **	Basic features of mlx image
@@ -137,9 +150,12 @@ typedef struct	s_env
 {
 	t_mlx		mlx;
 	t_cam		cam;
+	t_rot		rot;
 	t_light		*lite;
+	t_col		col;
 	t_obj		*objs;
 	t_obj		*cur;
+	double 		nb_iter;
 }				t_env;
 
 /*

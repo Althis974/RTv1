@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/03 12:29:53 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 15:25:45 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/04 13:55:57 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #include "../includes/rtv1.h"
 
 /*
-**	Initialize window
+**	Initializing window
 */
 
 int		ft_env_init(t_env *rt)
@@ -30,7 +30,7 @@ int		ft_env_init(t_env *rt)
 }
 
 /*
-**	Initialize image
+**	Initializing image
 **/
 
 int		ft_create(t_env *rt)
@@ -46,7 +46,7 @@ int		ft_create(t_env *rt)
 }
 
 /*
-** Try to implement multi-threading
+** Implementing multi-threading
 */
 
 void    init_thread(t_env *rt)
