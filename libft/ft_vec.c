@@ -1,41 +1,44 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_trace.c                                       .::    .:/ .      .::   */
+/*   ft_vec.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 15:26:27 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/14 14:53:51 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/14 10:58:37 by rlossy       #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/14 11:24:32 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/rtv1.h"
+#include "libft.h"
 
-/*
-**	Tracing
-*/
-
-int		ft_trace(t_env *rt, int part)
+t_vec	ft_vsub(t_vec *v1, t_vec *v2)
 {
-	int		x;
-	int		y;
-	int		stop;
-	int		start;
+	t_vec	v;
 
-	start = (MAX_H / THREADS) * part;
-	stop = (MAX_H / THREADS) * (part + 1);
-	y = start - 1;
-	while (++y < stop)
-	{
-		x = -1;
-		while (++x < MAX_W)
-		{
-			ft_set_cam(rt, x, y);
-			ft_get_obj_col(rt);
-//			ft_set_pixel(rt, x, y);
-		}
-	}
-	return (0);
+	v.x = v1->x - v2->x;
+	v.y = v1->y - v2->y;
+	v.z = v1->z - v2->z;
+	return (v);
+}
+
+t_vec	ft_vinter(t_vec *v1, t_vec *v2)
+{
+	t_vec v;
+
+	v.x = v1->y * v2->z - v1->z * v2->y;
+	v.y = v1->z * v2->x - v1->x * v2->z;
+	v.z = v1->x * v2->y - v1->y * v2->x;
+	return (v);
+}
+
+void	ft_vreg(t_vec *v)
+{
+	double	n;
+
+	n = 1.0 / sqrt((v->x * v->x) + (v->y * v->y) + (v->z * v->z));
+	v->x *= n;
+	v->y *= n;
+	v->z *= n;
 }

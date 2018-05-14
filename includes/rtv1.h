@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/04 13:55:57 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/14 17:03:12 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,6 +25,7 @@
 # define MID_W (MAX_W / 2)
 # define MID_H (MAX_H / 2)
 # define THREADS 8
+# define FOV 2.0
 
 /*
 **	[Color structure]
@@ -42,15 +43,8 @@ typedef struct	s_col
 /*
 **	[Vector structure]
 **
-**	Basic name for 3 axes
+**	Moved to Libft
 */
-
-typedef struct	s_vec
-{
-	double		x;
-	double		y;
-	double		z;
-}				t_vec;
 
 /*
 **	[Object structure]
@@ -141,9 +135,12 @@ typedef struct	s_mlx
 **
 **	mlx		=	basic mlx structure
 **	cam		=	camera structure
+**	rot		=	rotation structure
 **	*lite	=	allocation according to nb of spots from parsing
+**	col		=	original color of image (might not be kept)
 **	*objs	=	list of objects from parsing
 **	*cur	=	list to work on current object (might not be kept)
+**	dist	=	distance traveled by the ray
 */
 
 typedef struct	s_env
@@ -155,7 +152,7 @@ typedef struct	s_env
 	t_col		col;
 	t_obj		*objs;
 	t_obj		*cur;
-	double 		nb_iter;
+	double		dist;
 }				t_env;
 
 /*
@@ -176,14 +173,27 @@ typedef struct	s_th
 */
 
 void			ft_initialization(t_env *rt);
-int 			ft_env_init(t_env *rt);
-int 			ft_create(t_env *rt);
+int				ft_env_init(t_env *rt);
+int				ft_create(t_env *rt);
 
 /*
 **  Functions that take care of tracing.
 */
 
 int				ft_trace(t_env *rt, int part);
+
+/*
+**	Functions concerning camera
+*/
+
+void			ft_set_cam(t_env *rt, double x, double y);
+
+/*
+**	Functions concerning objects
+*/
+
+void			ft_get_obj_col(t_env *rt);
+t_obj			*ft_get_obj_inter(t_env *rt);
 
 /*
 **  Functions of differents scenes.

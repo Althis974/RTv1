@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/24 09:25:30 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/02 14:34:46 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/14 11:39:49 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,6 +21,7 @@
 # include <wchar.h>
 # include <sys/types.h>
 # include <sys/uio.h>
+# include <math.h>
 
 # define BUFF_SIZE 1000
 # define WSP(x) x == '\t' || x == '\n' || x == ' '
@@ -31,6 +32,19 @@ typedef	struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+/*
+**	[Vector structure]
+**
+**	Basic name for 3 axes
+*/
+
+typedef struct		s_vec
+{
+	double			x;
+	double			y;
+	double			z;
+}					t_vec;
 
 char				*ft_strdup(const char *src);
 size_t				ft_strlen(const char *str);
@@ -131,5 +145,9 @@ size_t				ft_wcharnput(wchar_t const *s, size_t len, int print);
 int					get_next_line(const int fd, char **line);
 int					ft_word_count(const char *s, char c);
 int					**ft_tab2d_init(size_t x, size_t y);
+
+t_vec				ft_vsub(t_vec *v1, t_vec *v2);
+t_vec				ft_vinter(t_vec *v1, t_vec *v2);
+void				ft_vreg(t_vec *v);
 
 #endif

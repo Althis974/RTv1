@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/03 12:29:53 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/04 13:55:57 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/14 17:04:02 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,13 +31,13 @@ int		ft_env_init(t_env *rt)
 
 /*
 **	Initializing image
-**/
+*/
 
 int		ft_create(t_env *rt)
 {
 	rt->mlx.img.img_ptr = mlx_new_image(rt->mlx.mlx_ptr, MAX_W, MAX_H);
-	rt->mlx.img.data = mlx_get_data_addr(rt->mlx.img.img_ptr, &rt->mlx.img.bpp,
-										 &rt->mlx.img.size_l, &rt->mlx.img.endian);
+	rt->mlx.img.data = mlx_get_data_addr(rt->mlx.img.img_ptr, &rt->mlx.img.bpp,\
+	&rt->mlx.img.size_l, &rt->mlx.img.endian);
 //	ft_trace(f);
 	init_thread(rt);
 	mlx_put_image_to_window(rt->mlx.mlx_ptr, rt->mlx.win, rt->mlx.img.img_ptr,
@@ -49,7 +49,7 @@ int		ft_create(t_env *rt)
 ** Implementing multi-threading
 */
 
-void    init_thread(t_env *rt)
+void	init_thread(t_env *rt)
 {
 	pthread_t	th[THREADS];
 	t_th		p[THREADS];
@@ -68,7 +68,7 @@ void    init_thread(t_env *rt)
 		pthread_join(th[i], NULL);
 }
 
-void		*threaderize(void *th)
+void	*threaderize(void *th)
 {
 	t_th			*p;
 
