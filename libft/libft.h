@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/24 09:25:30 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/14 11:39:49 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/15 10:45:42 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -149,5 +149,6 @@ int					**ft_tab2d_init(size_t x, size_t y);
 t_vec				ft_vsub(t_vec *v1, t_vec *v2);
 t_vec				ft_vinter(t_vec *v1, t_vec *v2);
 void				ft_vreg(t_vec *v);
+double				ft_vpoint(t_vec *v1, t_vec *v2);
 
 #endif

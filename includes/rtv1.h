@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/14 17:03:12 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/15 11:07:12 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,6 +53,7 @@ typedef struct	s_col
 **	pos		=	position of specific object
 **	rot		=	rotation of specific object
 **	col		=	color of specific object
+**	size	=	size of specific object
 **	*next	=	chained list to access to next object
 */
 
@@ -62,6 +63,7 @@ typedef struct	s_obj
 	t_vec			pos;
 	t_vec			rot;
 	t_col			col;
+	double			size;
 	struct s_obj	*next;
 }				t_obj;
 
@@ -194,6 +196,15 @@ void			ft_set_cam(t_env *rt, double x, double y);
 
 void			ft_get_obj_col(t_env *rt);
 t_obj			*ft_get_obj_inter(t_env *rt);
+
+/*
+**	Functions that take care of intersections
+*/
+
+double			ft_interplane(t_obj *obj, t_env *rt);
+double			ft_intersphere(t_obj *obj, t_env *rt);
+double			ft_intercylinder(t_obj *obj, t_env *rt);
+double			ft_intercone(t_obj *obj, t_env *rt);
 
 /*
 **  Functions of differents scenes.
