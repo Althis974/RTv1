@@ -32,7 +32,7 @@ void	ft_get_obj_col(t_env *rt)
 			pos = (t_vec){rt->rot.ori.x + rt->dist * rt->rot.dir.x, \
 			rt->rot.ori.y + rt->dist * rt->rot.dir.y, rt->rot.ori.z + \
 			rt->dist * rt->rot.dir.z};
-			ft_get_lite(rt, &pos);
+			ft_get_light(rt, &pos);
 		}
 	}
 }

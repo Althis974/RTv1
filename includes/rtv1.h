@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/15 11:07:12 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/15 16:24:04 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,12 +33,12 @@
 **	Shade of color from RGB
 */
 
-typedef struct	s_col
+typedef struct		s_col
 {
-	double		red;
-	double		green;
-	double		blue;
-}				t_col;
+	double			red;
+	double			green;
+	double			blue;
+}					t_col;
 
 /*
 **	[Vector structure]
@@ -54,29 +54,34 @@ typedef struct	s_col
 **	rot		=	rotation of specific object
 **	col		=	color of specific object
 **	size	=	size of specific object
+**	pow		=	intensity of light
 **	*next	=	chained list to access to next object
 */
 
-typedef struct	s_obj
+typedef struct		s_obj
 {
 	int				type;
 	t_vec			pos;
 	t_vec			rot;
 	t_col			col;
 	double			size;
+	double			pow;
 	struct s_obj	*next;
-}				t_obj;
+}					t_obj;
 
 /*
 **	[Light structure]
 **
 **	data	=	feature of light
+**
+**	/!\ Now considered as an object /!\
+**
+**
+**	typedef struct	s_light
+**	{
+**		t_vec		data;
+**	}				t_light;
 */
-
-typedef struct	s_light
-{
-	t_vec		data;
-}				t_light;
 
 /*
 **	[Camera structure]
@@ -85,11 +90,11 @@ typedef struct	s_light
 **	dir		=	direction of camera
 */
 
-typedef struct	s_cam
+typedef struct		s_cam
 {
-	t_vec		ori;
-	t_vec		dir;
-}				t_cam;
+	t_vec			ori;
+	t_vec			dir;
+}					t_cam;
 
 /*
 **	[Rotation structure]
@@ -98,11 +103,11 @@ typedef struct	s_cam
 **	dir		=	direction of rotation
 */
 
-typedef struct	s_rot
+typedef struct		s_rot
 {
-	t_vec		ori;
-	t_vec		dir;
-}				t_rot;
+	t_vec			ori;
+	t_vec			dir;
+}					t_rot;
 
 /*
 **	[Image structure]
@@ -110,14 +115,14 @@ typedef struct	s_rot
 **	Basic features of mlx image
 */
 
-typedef struct	s_img
+typedef struct		s_img
 {
-	int			size_l;
-	int			bpp;
-	int			endian;
-	char		*data;
-	void		*img_ptr;
-}				t_img;
+	int				size_l;
+	int				bpp;
+	int				endian;
+	char			*data;
+	void			*img_ptr;
+}					t_img;
 
 /*
 **	[Mlx structure]
@@ -125,12 +130,12 @@ typedef struct	s_img
 **	Basic features of mlx environment
 */
 
-typedef struct	s_mlx
+typedef struct		s_mlx
 {
-	void		*mlx_ptr;
-	void		*win;
-	t_img		img;
-}				t_mlx;
+	void			*mlx_ptr;
+	void			*win;
+	t_img			img;
+}					t_mlx;
 
 /*
 **	[Environment structure]
@@ -138,24 +143,22 @@ typedef struct	s_mlx
 **	mlx		=	basic mlx structure
 **	cam		=	camera structure
 **	rot		=	rotation structure
-**	*lite	=	allocation according to nb of spots from parsing
 **	col		=	original color of image (might not be kept)
 **	*objs	=	list of objects from parsing
 **	*cur	=	list to work on current object (might not be kept)
 **	dist	=	distance traveled by the ray
 */
 
-typedef struct	s_env
+typedef struct		s_env
 {
-	t_mlx		mlx;
-	t_cam		cam;
-	t_rot		rot;
-	t_light		*lite;
-	t_col		col;
-	t_obj		*objs;
-	t_obj		*cur;
-	double		dist;
-}				t_env;
+	t_mlx			mlx;
+	t_cam			cam;
+	t_rot			rot;
+	t_col			col;
+	t_obj			*objs;
+	t_obj			*cur;
+	double			dist;
+}					t_env;
 
 /*
 **	[Multi-thread structure]
@@ -164,47 +167,47 @@ typedef struct	s_env
 **	part	=	number of thread
 */
 
-typedef struct	s_th
+typedef struct		s_th
 {
-	t_env		*rt;
-	int			part;
-}				t_th;
+	t_env			*rt;
+	int				part;
+}					t_th;
 
 /*
 **  Initialize environment.
 */
 
-void			ft_initialization(t_env *rt);
-int				ft_env_init(t_env *rt);
-int				ft_create(t_env *rt);
+void				ft_initialization(t_env *rt);
+int					ft_env_init(t_env *rt);
+int					ft_create(t_env *rt);
 
 /*
 **  Functions that take care of tracing.
 */
 
-int				ft_trace(t_env *rt, int part);
+int					ft_trace(t_env *rt, int part);
 
 /*
 **	Functions concerning camera
 */
 
-void			ft_set_cam(t_env *rt, double x, double y);
+void				ft_set_cam(t_env *rt, double x, double y);
 
 /*
 **	Functions concerning objects
 */
 
-void			ft_get_obj_col(t_env *rt);
-t_obj			*ft_get_obj_inter(t_env *rt);
+void				ft_get_obj_col(t_env *rt);
+t_obj				*ft_get_obj_inter(t_env *rt);
 
 /*
 **	Functions that take care of intersections
 */
 
-double			ft_interplane(t_obj *obj, t_env *rt);
-double			ft_intersphere(t_obj *obj, t_env *rt);
-double			ft_intercylinder(t_obj *obj, t_env *rt);
-double			ft_intercone(t_obj *obj, t_env *rt);
+double				ft_interplane(t_obj *obj, t_env *rt);
+double				ft_intersphere(t_obj *obj, t_env *rt);
+double				ft_intercylinder(t_obj *obj, t_env *rt);
+double				ft_intercone(t_obj *obj, t_env *rt);
 
 /*
 **  Functions of differents scenes.
@@ -218,7 +221,7 @@ double			ft_intercone(t_obj *obj, t_env *rt);
 ** Try to implement multi-threading
 */
 
-void			init_thread(t_env *rt);
-void			*threaderize(void *th);
+void				init_thread(t_env *rt);
+void				*threaderize(void *th);
 
 #endif

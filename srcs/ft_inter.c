@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/15 10:39:06 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/15 11:10:02 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/15 11:15:47 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,8 +17,8 @@ double	ft_interplane(t_obj *obj, t_env *rt)
 {
 	double	t;
 
-	t = -((ft_vpoint(&obj->rot, &rt->rot.ori) - ft_vpoint(&obj->rot, &obj->pos))\
- / ft_vpoint(&obj->rot, &rt->rot.dir));
+	t = -((ft_vpoint(&obj->rot, &rt->rot.ori) - \
+	ft_vpoint(&obj->rot, &obj->pos)) / ft_vpoint(&obj->rot, &rt->rot.dir));
 	if (t < 0.0001)
 		return (-1.0);
 	return (t);
