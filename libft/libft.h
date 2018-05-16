@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/24 09:25:30 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/15 13:54:54 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/16 15:51:56 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,6 +45,19 @@ typedef struct		s_vec
 	double			y;
 	double			z;
 }					t_vec;
+
+/*
+**	[Color structure]
+**
+**	Shade of color from RGB
+*/
+
+typedef struct		s_col
+{
+	double			red;
+	double			green;
+	double			blue;
+}					t_col;
 
 char				*ft_strdup(const char *src);
 size_t				ft_strlen(const char *str);
@@ -145,10 +158,22 @@ size_t				ft_wcharnput(wchar_t const *s, size_t len, int print);
 int					get_next_line(const int fd, char **line);
 int					ft_word_count(const char *s, char c);
 int					**ft_tab2d_init(size_t x, size_t y);
+double				ft_reg(double x, double min, double max);
 
+t_vec				ft_vadd(t_vec *v1, t_vec *v2);
 t_vec				ft_vsub(t_vec *v1, t_vec *v2);
-t_vec				ft_vinter(t_vec *v1, t_vec *v2);
-void				ft_vreg(t_vec *v);
-double				ft_vpoint(t_vec *v1, t_vec *v2);
+t_vec				ft_vmul(t_vec *v1, t_vec *v2);
+t_vec				ft_vdiv(t_vec *v1, t_vec *v2);
+
+t_vec				ft_vaddx(t_vec *v1, double x);
+t_vec				ft_vsubx(t_vec *v1, double x);
+t_vec				ft_vmulx(t_vec *v1, double x);
+t_vec				ft_vdivx(t_vec *v1, double x);
+
+t_vec				ft_vcross(t_vec *v1, t_vec *v2);
+void				ft_vnorm(t_vec *v);
+void				ft_vreg(t_vec *v, double a, double b);
+double				ft_vdot(t_vec *v1, t_vec *v2);
+
 
 #endif

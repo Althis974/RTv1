@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_get.c                                         .::    .:/ .      .::   */
+/*   ft_obj_get.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/04 14:25:50 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/14 16:50:27 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/16 16:18:52 by rlossy       #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/16 16:19:06 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,8 +25,8 @@ void	ft_get_obj_col(t_env *rt)
 	rt->objs = ft_get_obj_inter(rt);
 	if (rt->dist > 0.0001 && rt->objs)
 	{
-		rt->col = (t_col){rt->objs->col.red, rt->objs->col.green, \
-		rt->objs->col.blue};
+		rt->col = (t_vec){rt->objs->col.x, rt->objs->col.y, \
+		rt->objs->col.z};
 		if (rt->dist < 10000.0)
 		{
 			pos = (t_vec){rt->rot.ori.x + rt->dist * rt->rot.dir.x, \
@@ -38,7 +38,7 @@ void	ft_get_obj_col(t_env *rt)
 }
 
 /*
-**	Getting distance traveled by the ray
+**	Getting distance traveled by the ray before object intersection
 */
 
 t_obj	*ft_get_obj_inter(t_env *rt)

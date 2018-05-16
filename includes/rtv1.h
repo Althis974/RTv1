@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/15 16:24:04 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/16 16:44:18 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,15 +30,8 @@
 /*
 **	[Color structure]
 **
-**	Shade of color from RGB
+**	/!\ Now considered as vector that correspond to coef of color /!\
 */
-
-typedef struct		s_col
-{
-	double			red;
-	double			green;
-	double			blue;
-}					t_col;
 
 /*
 **	[Vector structure]
@@ -63,25 +56,11 @@ typedef struct		s_obj
 	int				type;
 	t_vec			pos;
 	t_vec			rot;
-	t_col			col;
+	t_vec			col;
 	double			size;
 	double			pow;
 	struct s_obj	*next;
 }					t_obj;
-
-/*
-**	[Light structure]
-**
-**	data	=	feature of light
-**
-**	/!\ Now considered as an object /!\
-**
-**
-**	typedef struct	s_light
-**	{
-**		t_vec		data;
-**	}				t_light;
-*/
 
 /*
 **	[Camera structure]
@@ -108,6 +87,25 @@ typedef struct		s_rot
 	t_vec			ori;
 	t_vec			dir;
 }					t_rot;
+
+/*
+**	[Light structure]
+**
+**	normal	=	normal at the point of intersection
+**	spec	=	color of the light of a specular reflection
+**	lite	=	color of the object itself under pure white light
+**	shade	=	distance under the shadow
+**
+**	/!\ Parsed as an object. This structure is used for calculation /!\
+*/
+
+typedef struct		s_light
+{
+	t_vec			normal;
+	t_vec			spec;
+	t_vec			lite;
+	double			shade;
+}					t_light;
 
 /*
 **	[Image structure]
@@ -147,6 +145,7 @@ typedef struct		s_mlx
 **	*objs	=	list of objects from parsing
 **	*cur	=	list to work on current object (might not be kept)
 **	dist	=	distance traveled by the ray
+**	nb_spot	=	number of spotlight from parsing (multi-spots bonus)
 */
 
 typedef struct		s_env
@@ -154,10 +153,12 @@ typedef struct		s_env
 	t_mlx			mlx;
 	t_cam			cam;
 	t_rot			rot;
-	t_col			col;
+	t_vec			col;
+	t_light			light;
 	t_obj			*objs;
 	t_obj			*cur;
 	double			dist;
+	double			nb_spot;
 }					t_env;
 
 /*
@@ -201,7 +202,17 @@ void				ft_get_obj_col(t_env *rt);
 t_obj				*ft_get_obj_inter(t_env *rt);
 
 /*
-**	Functions that take care of intersections
+**	Functions concerning light
+*/
+
+void				ft_get_light(t_env *rt, t_vec *pos);
+double				ft_get_shade(t_env *rt, t_vec *pos);
+t_vec				ft_get_diffuse(t_env *rt, t_vec *pos);
+t_vec				ft_get_specular(t_env *rt, t_vec *pos);
+t_vec				ft_set_normal(t_obj *obj, t_vec *pos);
+
+/*
+**	Functions that take care of objects intersections
 */
 
 double				ft_interplane(t_obj *obj, t_env *rt);
@@ -210,7 +221,7 @@ double				ft_intercylinder(t_obj *obj, t_env *rt);
 double				ft_intercone(t_obj *obj, t_env *rt);
 
 /*
-**  Functions of differents scenes.
+**	Functions that take care of shadow intersections
 */
 
 /*
@@ -218,7 +229,7 @@ double				ft_intercone(t_obj *obj, t_env *rt);
 */
 
 /*
-** Try to implement multi-threading
+** Implementing multi-threading
 */
 
 void				init_thread(t_env *rt);
