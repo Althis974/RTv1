@@ -52,3 +52,10 @@ t_vec	ft_vdivx(t_vec *v1, double x)
 	v.z = v1->z / x;
 	return (v);
 }
+
+void	ft_vreg(t_vec *v, double a, double b)
+{
+	v->x = ft_reg(v->x, a, b);
+	v->y = ft_reg(v->y, a, b);
+	v->z = ft_reg(v->z, a, b);
+}

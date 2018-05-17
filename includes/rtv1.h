@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/16 16:44:18 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 16:40:42 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -76,17 +76,17 @@ typedef struct		s_cam
 }					t_cam;
 
 /*
-**	[Rotation structure]
+**	[Ray structure]
 **
-**	ori		=	origin of rotation
-**	dir		=	direction of rotation
+**	ori		=	origin of ray
+**	dir		=	direction of ray
 */
 
-typedef struct		s_rot
+typedef struct		s_ray
 {
 	t_vec			ori;
 	t_vec			dir;
-}					t_rot;
+}					t_ray;
 
 /*
 **	[Light structure]
@@ -140,7 +140,7 @@ typedef struct		s_mlx
 **
 **	mlx		=	basic mlx structure
 **	cam		=	camera structure
-**	rot		=	rotation structure
+**	ray		=	ray structure
 **	col		=	original color of image (might not be kept)
 **	*objs	=	list of objects from parsing
 **	*cur	=	list to work on current object (might not be kept)
@@ -152,7 +152,7 @@ typedef struct		s_env
 {
 	t_mlx			mlx;
 	t_cam			cam;
-	t_rot			rot;
+	t_ray			ray;
 	t_vec			col;
 	t_light			light;
 	t_obj			*objs;
@@ -187,6 +187,7 @@ int					ft_create(t_env *rt);
 */
 
 int					ft_trace(t_env *rt, int part);
+void				ft_set_pixel(t_env *rt, int x, int y);
 
 /*
 **	Functions concerning camera
@@ -200,6 +201,12 @@ void				ft_set_cam(t_env *rt, double x, double y);
 
 void				ft_get_obj_col(t_env *rt);
 t_obj				*ft_get_obj_inter(t_env *rt);
+
+/*
+**	Functions concerning shadow
+*/
+
+double				ft_get_shade_inter(t_env *rt, t_vec *pos, t_vec *objpos);
 
 /*
 **	Functions concerning light
@@ -224,9 +231,26 @@ double				ft_intercone(t_obj *obj, t_env *rt);
 **	Functions that take care of shadow intersections
 */
 
+int					ft_shadsphere(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir, \
+					double len);
+int					ft_shadcylinder(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir,\
+					double len);
+int					ft_shadcone(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir, \
+					double len);
+
+/*
+**	Function of existing algorithms
+*/
+
+t_vec				ft_lambert(t_obj *obj, t_vec *pos, t_vec *normal);
+double				ft_phong(t_obj *obj, t_vec *pos, t_vec *normal, \
+					t_vec *ray_dir);
+
 /*
 **  Functions that take care of events.
 */
+
+int					ft_getting_keys(int key, t_env *rt);
 
 /*
 ** Implementing multi-threading

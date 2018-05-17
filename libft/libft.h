@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/24 09:25:30 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/16 15:51:56 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 14:10:00 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -171,9 +171,11 @@ t_vec				ft_vmulx(t_vec *v1, double x);
 t_vec				ft_vdivx(t_vec *v1, double x);
 
 t_vec				ft_vcross(t_vec *v1, t_vec *v2);
+t_vec				ft_vreflect(t_vec *intensity, t_vec *normal);
 void				ft_vnorm(t_vec *v);
 void				ft_vreg(t_vec *v, double a, double b);
 double				ft_vdot(t_vec *v1, t_vec *v2);
-
+double				ft_vlen(t_vec *v);
+double				ft_vdist(t_vec *v1, t_vec *v2);
 
 #endif

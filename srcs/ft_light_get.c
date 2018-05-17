@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/16 16:19:43 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/16 16:58:25 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 15:18:53 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -71,7 +71,7 @@ t_vec	ft_get_diffuse(t_env *rt, t_vec *pos)
 	{
 		if (obj->type == 4)
 		{
-			tmp = ft_lambert(obj, &rt->light.normal, pos);
+			tmp = ft_lambert(obj, pos, &rt->light.normal);
 			lite = ft_vadd(&lite, &tmp);
 		}
 		obj = obj->next;
@@ -95,8 +95,8 @@ t_vec	ft_get_specular(t_env *rt, t_vec *pos)
 	while (obj)
 	{
 		if (obj->type == 4)
-			spec = ft_vaddx(&spec, ft_phong(obj, &rt->light.normal, \
-			&rt->rot.dir, pos));
+			spec = ft_vaddx(&spec, ft_phong(obj, pos, &rt->light.normal, \
+			&rt->ray.dir));
 		obj = obj->next;
 	}
 	ft_vreg(&spec, 0.0, 1.0);

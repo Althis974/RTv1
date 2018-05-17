@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_reg.c                                         .::    .:/ .      .::   */
+/*   ft_keycode.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/16 11:11:30 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/16 11:12:53 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/17 16:39:34 by rlossy       #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/17 16:40:42 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/rtv1.h"
 
-double	ft_reg(double x, double min, double max)
+int		ft_getting_keys(int key, t_env *rt)
 {
-	x = x < min ? min : x;
-	x = x > max ? max : x;
-	return (x);
+	if (key == ESC && rt)
+		exit(0);
+	return (0);
 }

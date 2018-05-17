@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/14 14:55:20 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/16 15:26:28 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 16:28:52 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,9 +32,9 @@ void	ft_set_cam(t_env *rt, double x, double y)
 	v2 = ft_vcross(&v1, &(t_vec){0.0, 1.0, 0.0});
 	ft_vnorm(&v2);
 	v3 = ft_vcross(&v2, &v1);
-	rt->rot.dir = (t_vec){u * v2.x + v * v3.x + FOV * v1.x, u * v2.y + v * \
-	v3.y + FOV * v1.y, u * v2.z + v * v3.z + FOV * v1.z};
-	rt->rot.ori = rt->cam.ori;
+	rt->ray.dir = (t_vec){u * v2.x + v * v3.x + FOV * v1.x, u * v2.y + v * \
+		v3.y + FOV * v1.y, u * v2.z + v * v3.z + FOV * v1.z};
+	rt->ray.ori = rt->cam.ori;
 //	rt->objs = NULL;
 }
 
@@ -44,13 +44,37 @@ void	ft_set_cam(t_env *rt, double x, double y)
 
 t_vec	ft_set_normal(t_obj *obj, t_vec *pos)
 {
-	t_vec	nor;
+	t_vec	normal;
 
-	nor = (t_vec){0.0, 1.0, 0.0};
+	normal = (t_vec){0.0, 1.0, 0.0};
 	if (obj->type == 1)
-		nor = ft_vsub(pos, &obj->pos);
+		normal = ft_vsub(pos, &obj->pos);
 	else if (obj->type == 2 || obj->type == 3)
-		nor = (t_vec){pos->x - obj->pos.x, 0.0, pos->z - obj->pos.z};
-	ft_vnorm(&nor);
-	return (nor);
+		normal = (t_vec){pos->x - obj->pos.x, 0.0, pos->z - obj->pos.z};
+	ft_vnorm(&normal);
+	return (normal);
+}
+
+/*
+**	Setting pixel on mlx image
+*/
+
+void	ft_set_pixel(t_env *rt, int x, int y)
+{
+	int		r;
+	int		g;
+	int		b;
+
+	r = (int)(rt->col.x * 256) % 256;
+	g = ((int)(rt->col.y * 256) % 256) * 256;
+	b = ((int)(rt->col.z * 256) % 256) * 256 * 256;
+	if (y >= 0 && x >= 0 && y < MAX_H && x < MAX_W)
+	{
+		rt->mlx.img.data[(y * rt->mlx.img.size_l)
+						+ ((rt->mlx.img.bpp / 8) * x) + 2] = (char)r;
+		rt->mlx.img.data[(y * rt->mlx.img.size_l)
+						+ ((rt->mlx.img.bpp / 8) * x) + 1] = (char)g;
+		rt->mlx.img.data[(y * rt->mlx.img.size_l)
+						+ ((rt->mlx.img.bpp / 8) * x)] = (char)b;
+	}
 }

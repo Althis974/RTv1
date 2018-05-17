@@ -6,7 +6,7 @@
 #    By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/03/14 14:34:00 by rlossy       #+#   ##    ##    #+#        #
-#   Updated: 2018/05/02 14:34:39 by rlossy      ###    #+. /#+    ###.fr     # #
+#   Updated: 2018/05/17 15:31:00 by rlossy      ###    #+. /#+    ###.fr     # #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -15,8 +15,9 @@ NAME		=	rtv1
 LIB_DIR		=	./libft
 LIBX_DIR	=	./minilibx_macos
 HEADER		=	./includes/
-FILENAMES	=	main.c
-#FILENAMES	+=
+FILENAMES	=	main.c ft_env.c ft_trace.c ft_obj_get.c ft_obj_inter.c ft_set.c
+FILENAMES   +=  ft_light_get.c ft_shade_get.c ft_shade_inter.c ft_algo.c
+FILENAMES   +=  ft_keycode.c
 
 SOURCES		=	$(addprefix srcs/, $(FILENAMES))
 OBJECTS		=	$(addprefix build/, $(FILENAMES:.c=.o)) 

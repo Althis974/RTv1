@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/03 15:26:27 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/15 13:54:54 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/17 16:35:02 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,7 +34,7 @@ int		ft_trace(t_env *rt, int part)
 		{
 			ft_set_cam(rt, x, y);
 			ft_get_obj_col(rt);
-//			ft_set_pixel(rt, x, y);
+			ft_set_pixel(rt, x, y);
 		}
 	}
 	return (0);

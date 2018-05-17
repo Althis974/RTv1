@@ -29,9 +29,9 @@ void	ft_get_obj_col(t_env *rt)
 		rt->objs->col.z};
 		if (rt->dist < 10000.0)
 		{
-			pos = (t_vec){rt->rot.ori.x + rt->dist * rt->rot.dir.x, \
-			rt->rot.ori.y + rt->dist * rt->rot.dir.y, rt->rot.ori.z + \
-			rt->dist * rt->rot.dir.z};
+			pos = (t_vec){rt->ray.ori.x + rt->dist * rt->ray.dir.x, \
+			rt->ray.ori.y + rt->dist * rt->ray.dir.y, rt->ray.ori.z + \
+			rt->dist * rt->ray.dir.z};
 			ft_get_light(rt, &pos);
 		}
 	}
