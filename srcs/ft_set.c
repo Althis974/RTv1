@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/14 14:55:20 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/17 16:28:52 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/22 17:01:03 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,46 +35,37 @@ void	ft_set_cam(t_env *rt, double x, double y)
 	rt->ray.dir = (t_vec){u * v2.x + v * v3.x + FOV * v1.x, u * v2.y + v * \
 		v3.y + FOV * v1.y, u * v2.z + v * v3.z + FOV * v1.z};
 	rt->ray.ori = rt->cam.ori;
-//	rt->objs = NULL;
+	rt->objs = NULL;
 }
 
 /*
 **	Setting normal at the point of intersection
 */
 
-t_vec	ft_set_normal(t_obj *obj, t_vec *pos)
+void	ft_set_normal(t_env *rt, t_vec *pos)
 {
-	t_vec	normal;
-
-	normal = (t_vec){0.0, 1.0, 0.0};
-	if (obj->type == 1)
-		normal = ft_vsub(pos, &obj->pos);
-	else if (obj->type == 2 || obj->type == 3)
-		normal = (t_vec){pos->x - obj->pos.x, 0.0, pos->z - obj->pos.z};
-	ft_vnorm(&normal);
-	return (normal);
+	if (rt->objs->type == 1)
+		rt->light.normal = ft_vsub(pos, &rt->objs->pos);
+	else if (rt->objs->type == 2 || rt->objs->type == 3)
+		rt->light.normal = (t_vec){pos->x - rt->objs->pos.x, 0.0, pos->z - \
+		rt->objs->pos.z};
+	ft_vnorm(&rt->light.normal);
 }
 
 /*
 **	Setting pixel on mlx image
 */
 
-void	ft_set_pixel(t_env *rt, int x, int y)
+void	ft_set_pixel(t_env *rt, int x, int y, int color)
 {
-	int		r;
-	int		g;
-	int		b;
+	int		i;
+	int		p;
 
-	r = (int)(rt->col.x * 256) % 256;
-	g = ((int)(rt->col.y * 256) % 256) * 256;
-	b = ((int)(rt->col.z * 256) % 256) * 256 * 256;
-	if (y >= 0 && x >= 0 && y < MAX_H && x < MAX_W)
+	i = -1;
+	p = x * (rt->mlx.img.bpp / 8) + y * (rt->mlx.img.size_l);
+	while (++i < (rt->mlx.img.bpp / 8))
 	{
-		rt->mlx.img.data[(y * rt->mlx.img.size_l)
-						+ ((rt->mlx.img.bpp / 8) * x) + 2] = (char)r;
-		rt->mlx.img.data[(y * rt->mlx.img.size_l)
-						+ ((rt->mlx.img.bpp / 8) * x) + 1] = (char)g;
-		rt->mlx.img.data[(y * rt->mlx.img.size_l)
-						+ ((rt->mlx.img.bpp / 8) * x)] = (char)b;
+		rt->mlx.img.data[p + i] = (char)color;
+		color >>= 8;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/16 16:18:52 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/16 16:19:06 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/22 16:16:50 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,13 +21,13 @@ void	ft_get_obj_col(t_env *rt)
 {
 	t_vec	pos;
 
-	rt->dist = 10000.0;
+	rt->dist = 1000.0;
 	rt->objs = ft_get_obj_inter(rt);
-	if (rt->dist > 0.0001 && rt->objs)
+	if (rt->dist > 0.001 && rt->objs)
 	{
 		rt->col = (t_vec){rt->objs->col.x, rt->objs->col.y, \
 		rt->objs->col.z};
-		if (rt->dist < 10000.0)
+		if (rt->dist < 1000.0)
 		{
 			pos = (t_vec){rt->ray.ori.x + rt->dist * rt->ray.dir.x, \
 			rt->ray.ori.y + rt->dist * rt->ray.dir.y, rt->ray.ori.z + \
@@ -43,29 +43,29 @@ void	ft_get_obj_col(t_env *rt)
 
 t_obj	*ft_get_obj_inter(t_env *rt)
 {
+	t_obj	*cur;
 	t_obj	*objs;
-	t_obj	*obj;
 	double	tmp;
 
-	obj = NULL;
-	objs = rt->cur;
+	objs = NULL;
+	cur = rt->cur;
 	tmp = rt->dist;
-	while (objs)
+	while (cur)
 	{
-		if (objs->type == 0)
-			tmp = ft_interplane(objs, rt);
-		else if (objs->type == 1)
-			tmp = ft_intersphere(objs, rt);
-		else if (objs->type == 2)
-			tmp = ft_intercylinder(objs, rt);
-		else if (objs->type == 3)
-			tmp = ft_intercone(objs, rt);
-		if (tmp > 0.0001 && tmp < rt->dist)
+		if (cur->type == 0)
+			tmp = ft_interplane(rt, cur);
+		else if (cur->type == 1)
+			tmp = ft_intersphere(rt, cur);
+		else if (cur->type == 2)
+			tmp = ft_intercylinder(rt, cur);
+		else if (cur->type == 3)
+			tmp = ft_intercone(rt, cur);
+		if (tmp > 0.001 && tmp < rt->dist)
 		{
-			obj = objs;
+			objs = cur;
 			rt->dist = tmp;
 		}
-		objs = objs->next;
+		cur = cur->next;
 	}
-	return (obj);
+	return (objs);
 }

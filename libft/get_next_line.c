@@ -107,7 +107,7 @@ int			get_next_line(int const fd, char **line)
 
 	tmp = ft_strnew(BUFF_SIZE);
 	if (!line || BUFF_SIZE <= 0 || fd < 0 || (ret = read(fd, tmp, 0)) < 0)
-		return (-1);
+		return (-ft_normalize(&tmp, 2, &buf[fd]));
 	while ((ret = read(fd, tmp, BUFF_SIZE)) > 0)
 	{
 		res = ft_check(&buf[fd], &tmp, line);

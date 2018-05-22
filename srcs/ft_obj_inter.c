@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/16 16:17:15 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/17 11:49:07 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/22 16:15:50 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,13 +18,13 @@
 **	in case of a plane
 */
 
-double	ft_interplane(t_obj *obj, t_env *rt)
+double	ft_interplane(t_env *rt, t_obj *obj)
 {
 	double	t;
 
 	t = -((ft_vdot(&obj->rot, &rt->ray.ori) - \
 	ft_vdot(&obj->rot, &obj->pos)) / ft_vdot(&obj->rot, &rt->ray.dir));
-	if (t < 0.0001)
+	if (t < 0.001)
 		return (-1.0);
 	return (t);
 }
@@ -34,7 +34,7 @@ double	ft_interplane(t_obj *obj, t_env *rt)
 **	in case of a sphere
 */
 
-double	ft_intersphere(t_obj *obj, t_env *rt)
+double	ft_intersphere(t_env *rt, t_obj *obj)
 {
 	t_vec	center;
 	double	a;
@@ -47,7 +47,7 @@ double	ft_intersphere(t_obj *obj, t_env *rt)
 	b = ft_vdot(&center, &rt->ray.dir);
 	c = ft_vdot(&center, &center) - obj->size * obj->size;
 	h = b * b - a * c;
-	if (h < 0.0001)
+	if (h < 0.001)
 		return (-1.0);
 	return ((-b - sqrt(h)) / a);
 }
@@ -57,7 +57,7 @@ double	ft_intersphere(t_obj *obj, t_env *rt)
 **	in case of a cylinder
 */
 
-double	ft_intercylinder(t_obj *obj, t_env *rt)
+double	ft_intercylinder(t_env *rt, t_obj *obj)
 {
 	t_vec	center;
 	double	a;
@@ -70,7 +70,7 @@ double	ft_intercylinder(t_obj *obj, t_env *rt)
 	b = (rt->ray.dir.x * center.x + rt->ray.dir.z * center.z);
 	c = center.x * center.x + center.z * center.z - obj->size * obj->size;
 	h = b * b - a * c;
-	if (h < 0.0001)
+	if (h < 0.001)
 		return (-1.0);
 	return ((-b - sqrt(h)) / a);
 }
@@ -80,7 +80,7 @@ double	ft_intercylinder(t_obj *obj, t_env *rt)
 **	in case of a cone
 */
 
-double	ft_intercone(t_obj *obj, t_env *rt)
+double	ft_intercone(t_env *rt, t_obj *obj)
 {
 	t_vec	center;
 	double	a;
@@ -95,7 +95,7 @@ double	ft_intercone(t_obj *obj, t_env *rt)
 		* center.z;
 	c = center.x * center.x + center.z * center.z - center.y * center.y;
 	h = b * b - a * c;
-	if (h < 0.0001)
+	if (h < 0.001)
 		return (-1.0);
 	return ((-b - sqrt(h)) / a);
 }

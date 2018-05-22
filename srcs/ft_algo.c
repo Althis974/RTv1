@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/17 13:58:26 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/17 14:59:29 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/22 17:09:16 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,8 +19,8 @@
 
 t_vec	ft_lambert(t_obj *obj, t_vec *pos, t_vec *normal)
 {
-	t_vec	lambert;
 	t_vec	lite;
+	t_vec	lambert;
 	double	val;
 	double	dist;
 
@@ -41,15 +41,15 @@ t_vec	ft_lambert(t_obj *obj, t_vec *pos, t_vec *normal)
 **	Translation of Phong shading
 */
 
-double	ft_phong(t_obj *obj, t_vec *pos, t_vec *normal, t_vec *ray_dir)
+double	ft_phong(t_env *rt, t_obj *obj, t_vec *pos)
 {
-	t_vec	reflect;
 	t_vec	lite;
+	t_vec	reflect;
 	double	phong;
 
 	lite = ft_vsub(&obj->pos, pos);
 	ft_vnorm(&lite);
-	reflect = ft_vreflect(ray_dir, normal);
+	reflect = ft_vreflect(&rt->ray.dir, &rt->light.normal);
 	ft_vnorm(&reflect);
 	phong = ft_reg(pow(ft_reg(ft_vdot(&reflect, &lite), 0.0, 1.0), 50.0), \
 	0.0, 1.0);

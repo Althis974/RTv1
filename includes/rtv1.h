@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/17 16:40:42 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/22 17:07:56 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,15 +22,13 @@
 # include <pthread.h>
 # define MAX_H 1000
 # define MAX_W 1000
-# define MID_W (MAX_W / 2)
-# define MID_H (MAX_H / 2)
-# define THREADS 8
+# define THREADS 4
 # define FOV 2.0
 
 /*
 **	[Color structure]
 **
-**	/!\ Now considered as vector that correspond to coef of color /!\
+**	/!\ Now considered as vector that correspond to coefficient of color /!\
 */
 
 /*
@@ -187,7 +185,7 @@ int					ft_create(t_env *rt);
 */
 
 int					ft_trace(t_env *rt, int part);
-void				ft_set_pixel(t_env *rt, int x, int y);
+void				ft_set_pixel(t_env *rt, int x, int y, int color);
 
 /*
 **	Functions concerning camera
@@ -213,19 +211,19 @@ double				ft_get_shade_inter(t_env *rt, t_vec *pos, t_vec *objpos);
 */
 
 void				ft_get_light(t_env *rt, t_vec *pos);
-double				ft_get_shade(t_env *rt, t_vec *pos);
-t_vec				ft_get_diffuse(t_env *rt, t_vec *pos);
-t_vec				ft_get_specular(t_env *rt, t_vec *pos);
-t_vec				ft_set_normal(t_obj *obj, t_vec *pos);
+void				ft_get_shade(t_env *rt, t_vec *pos);
+void				ft_get_diffuse(t_env *rt, t_vec *pos);
+void				ft_get_specular(t_env *rt, t_vec *pos);
+void				ft_set_normal(t_env *rt, t_vec *pos);
 
 /*
 **	Functions that take care of objects intersections
 */
 
-double				ft_interplane(t_obj *obj, t_env *rt);
-double				ft_intersphere(t_obj *obj, t_env *rt);
-double				ft_intercylinder(t_obj *obj, t_env *rt);
-double				ft_intercone(t_obj *obj, t_env *rt);
+double				ft_interplane(t_env *rt, t_obj *obj);
+double				ft_intersphere(t_env *rt, t_obj *obj);
+double				ft_intercylinder(t_env *rt, t_obj *obj);
+double				ft_intercone(t_env *rt, t_obj *obj);
 
 /*
 **	Functions that take care of shadow intersections
@@ -243,9 +241,7 @@ int					ft_shadcone(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir, \
 */
 
 t_vec				ft_lambert(t_obj *obj, t_vec *pos, t_vec *normal);
-double				ft_phong(t_obj *obj, t_vec *pos, t_vec *normal, \
-					t_vec *ray_dir);
-
+double				ft_phong(t_env *rt, t_obj *obj, t_vec *pos);
 /*
 **  Functions that take care of events.
 */

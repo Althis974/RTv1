@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/17 11:25:12 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/17 12:16:53 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/22 17:15:47 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,8 +82,8 @@ int		ft_shadcone(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir, double len)
 	a = ray_dir->x * ray_dir->x - ray_dir->y * ray_dir->y + ray_dir->z * \
 	ray_dir->z;
 	b = ray_dir->x * center.x - ray_dir->y * center.y + ray_dir->z * center.z;
-	c = center.x * center.x + center.z * center.z - obj->size * obj->size;
-	h = center.x * center.x + center.z * center.z - center.y * center.y;
+	c = center.x * center.x + center.z * center.z - center.y * center.y;
+	h = b * b - a * c;
 	if (h > 0.001)
 	{
 		h = (-b - sqrt(h)) / a;
