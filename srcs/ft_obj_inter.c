@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/16 16:17:15 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/22 16:15:50 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/24 10:29:43 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,16 +40,16 @@ double	ft_intersphere(t_env *rt, t_obj *obj)
 	double	a;
 	double	b;
 	double	c;
-	double	h;
+	double	d;
 
 	center = ft_vsub(&rt->ray.ori, &obj->pos);
 	a = ft_vdot(&rt->ray.dir, &rt->ray.dir);
 	b = ft_vdot(&center, &rt->ray.dir);
 	c = ft_vdot(&center, &center) - obj->size * obj->size;
-	h = b * b - a * c;
-	if (h < 0.001)
+	d = b * b - a * c;
+	if (d < 0.001)
 		return (-1.0);
-	return ((-b - sqrt(h)) / a);
+	return ((-b - sqrt(d)) / a);
 }
 
 /*
@@ -63,16 +63,16 @@ double	ft_intercylinder(t_env *rt, t_obj *obj)
 	double	a;
 	double	b;
 	double	c;
-	double	h;
+	double	d;
 
 	center = ft_vsub(&rt->ray.ori, &obj->pos);
 	a = rt->ray.dir.x * rt->ray.dir.x + rt->ray.dir.z * rt->ray.dir.z;
 	b = (rt->ray.dir.x * center.x + rt->ray.dir.z * center.z);
 	c = center.x * center.x + center.z * center.z - obj->size * obj->size;
-	h = b * b - a * c;
-	if (h < 0.001)
+	d = b * b - a * c;
+	if (d < 0.001)
 		return (-1.0);
-	return ((-b - sqrt(h)) / a);
+	return ((-b - sqrt(d)) / a);
 }
 
 /*
@@ -86,7 +86,7 @@ double	ft_intercone(t_env *rt, t_obj *obj)
 	double	a;
 	double	b;
 	double	c;
-	double	h;
+	double	d;
 
 	center = ft_vsub(&rt->ray.ori, &obj->pos);
 	a = rt->ray.dir.x * rt->ray.dir.x - rt->ray.dir.y * rt->ray.dir.y \
@@ -94,8 +94,8 @@ double	ft_intercone(t_env *rt, t_obj *obj)
 	b = rt->ray.dir.x * center.x - rt->ray.dir.y * center.y + rt->ray.dir.z \
 		* center.z;
 	c = center.x * center.x + center.z * center.z - center.y * center.y;
-	h = b * b - a * c;
-	if (h < 0.001)
+	d = b * b - a * c;
+	if (d < 0.001)
 		return (-1.0);
-	return ((-b - sqrt(h)) / a);
+	return ((-b - sqrt(d)) / a);
 }

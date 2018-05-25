@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/14 14:55:20 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/22 17:01:03 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/24 16:18:54 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,6 @@ void	ft_set_cam(t_env *rt, double x, double y)
 	rt->ray.dir = (t_vec){u * v2.x + v * v3.x + FOV * v1.x, u * v2.y + v * \
 		v3.y + FOV * v1.y, u * v2.z + v * v3.z + FOV * v1.z};
 	rt->ray.ori = rt->cam.ori;
-	rt->objs = NULL;
 }
 
 /*
@@ -44,6 +43,7 @@ void	ft_set_cam(t_env *rt, double x, double y)
 
 void	ft_set_normal(t_env *rt, t_vec *pos)
 {
+	rt->light.normal = (t_vec){0.0, 1.0, 0.0};
 	if (rt->objs->type == 1)
 		rt->light.normal = ft_vsub(pos, &rt->objs->pos);
 	else if (rt->objs->type == 2 || rt->objs->type == 3)
@@ -56,13 +56,13 @@ void	ft_set_normal(t_env *rt, t_vec *pos)
 **	Setting pixel on mlx image
 */
 
-void	ft_set_pixel(t_env *rt, int x, int y, int color)
+void	ft_set_pixel(t_env *rt, double x, double y, int color)
 {
 	int		i;
 	int		p;
 
 	i = -1;
-	p = x * (rt->mlx.img.bpp / 8) + y * (rt->mlx.img.size_l);
+	p = (int)(x * (rt->mlx.img.bpp / 8) + y * (rt->mlx.img.size_l));
 	while (++i < (rt->mlx.img.bpp / 8))
 	{
 		rt->mlx.img.data[p + i] = (char)color;
