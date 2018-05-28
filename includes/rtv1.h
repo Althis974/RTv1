@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/25 13:12:50 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/28 16:16:47 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,13 +22,13 @@
 # include <pthread.h>
 # define MAX_H 1000
 # define MAX_W 1000
-# define THREADS 2
+# define THREADS 8
 # define FOV 2.0
 
 /*
 **	[Color structure]
 **
-**	/!\ Now considered as vector that correspond to coefficient of color /!\
+**	/!\ Now considered as vector that correspond to color coefficient /!\
 */
 
 /*
@@ -136,29 +136,38 @@ typedef struct		s_mlx
 /*
 **	[Environment structure]
 **
+**	th		=	number of thread
+**	aax		=	x storage for anti-aliasing
+**	aay		=	y storage for anti-aliasing
+**	dist	=	distance traveled by the ray
+**	nb_spot	=	number of spotlight from parsing (multi-spots bonus)
+**	aa		=	anti-aliasing value
 **	mlx		=	basic mlx structure
 **	cam		=	camera structure
 **	ray		=	ray structure
-**	col		=	original color of image (might not be kept)
+**	col		=	temporary color coefficient
+**	rgb		=	final color coefficient
 **	*objs	=	list of objects from parsing
-**	*cur	=	list to work on current object (might not be kept)
-**	dist	=	distance traveled by the ray
-**	nb_spot	=	number of spotlight from parsing (multi-spots bonus)
-**	th		=	number of thread
+**	*cur	=	list to work on current object
+**	light	=	light structure
 */
 
 typedef struct		s_env
 {
+	int				th;
+	int				aax;
+	int				aay;
+	double			dist;
+	double			nb_spot;
+	double			aa;
 	t_mlx			mlx;
 	t_cam			cam;
 	t_ray			ray;
 	t_vec			col;
-	t_light			light;
+	t_vec			rgb;
 	t_obj			*objs;
 	t_obj			*cur;
-	double			dist;
-	double			nb_spot;
-	int				th;
+	t_light			light;
 }					t_env;
 
 /*
@@ -175,7 +184,8 @@ int					ft_create(t_env *rt);
 
 void				init_thread(t_env *rt);
 void				*ft_trace(void *th);
-void				ft_set_pixel(t_env *rt, double x, double y, int color);
+void				ft_aa(t_env *rt, double x, double y);
+void				ft_set_pixel(t_env *rt, int x, int y, int color);
 
 /*
 **	Functions concerning camera

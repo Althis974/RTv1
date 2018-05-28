@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/14 14:55:20 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/24 16:18:54 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/28 12:44:35 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,16 +56,17 @@ void	ft_set_normal(t_env *rt, t_vec *pos)
 **	Setting pixel on mlx image
 */
 
-void	ft_set_pixel(t_env *rt, double x, double y, int color)
+void	ft_set_pixel(t_env *rt, int x, int y, int color)
 {
-	int		i;
-	int		p;
+	int	i;
+	int	p;
 
-	i = -1;
-	p = (int)(x * (rt->mlx.img.bpp / 8) + y * (rt->mlx.img.size_l));
-	while (++i < (rt->mlx.img.bpp / 8))
+	i = 0;
+	p = (x * ((rt->mlx.img.bpp / 8)) + y * (rt->mlx.img.size_l));
+	while (i < (rt->mlx.img.bpp / 8))
 	{
 		rt->mlx.img.data[p + i] = (char)color;
 		color >>= 8;
+		i++;
 	}
 }
