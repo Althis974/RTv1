@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/17 11:24:26 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/24 10:18:21 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/30 14:10:16 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,6 +40,37 @@ void	ft_get_shade(t_env *rt, t_vec *pos)
 /*
 **	Getting distance traveled by the ray before shade intersection
 */
+/*
+double	ft_get_shade_inter(t_env *rt, t_vec *pos, t_vec *objpos)
+{
+	double	tmp;
+	double	shade;
+	t_vec	lite;
+	t_obj	*objs;
+//	double	len;
+
+	tmp = 0;
+	objs = rt->cur;
+//	len = ft_vlen(&lite);
+	lite = ft_vsub(objpos, pos);
+	shade = sqrtf(ft_vdot(&lite, &lite));
+	ft_vnorm(&lite);
+	while (objs)
+	{
+		if (objs->type == 0)
+			tmp = ft_interplane(rt, objs, lite, *pos);
+//		else if (objs->type == 1)
+//			tmp = ft_shadsphere(objs, pos, &lite, len);
+		else if (objs->type == 2)
+			tmp = ft_intercylinder(rt, objs, lite, *pos);
+//		else if (objs->type == 3)
+//			tmp = ft_shadcone(objs, pos, &lite, len);
+		if (tmp > 0.0001  && tmp < shade)
+			return (1);
+		objs = objs->next;
+	}
+	return (0);
+}*/
 
 double	ft_get_shade_inter(t_env *rt, t_vec *pos, t_vec *objpos)
 {

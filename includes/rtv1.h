@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/28 16:16:47 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/30 17:04:17 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -221,8 +221,10 @@ void				ft_set_normal(t_env *rt, t_vec *pos);
 */
 
 double				ft_interplane(t_env *rt, t_obj *obj);
+//double	ft_interplane(t_env *rt, t_obj *obj, t_vec ray, t_vec pos);
 double				ft_intersphere(t_env *rt, t_obj *obj);
 double				ft_intercylinder(t_env *rt, t_obj *obj);
+//double	ft_intercylinder(t_env *rt, t_obj *obj, t_vec ray, t_vec pos);
 double				ft_intercone(t_env *rt, t_obj *obj);
 
 /*

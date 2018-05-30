@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/16 16:18:52 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/24 11:34:41 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/30 17:04:17 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -54,10 +54,12 @@ t_obj	*ft_get_obj_inter(t_env *rt)
 	{
 		if (cur->type == 0)
 			tmp = ft_interplane(rt, cur);
+			//tmp = ft_interplane(rt, cur, rt->ray.dir, rt->cam.ori);
 		else if (cur->type == 1)
 			tmp = ft_intersphere(rt, cur);
 		else if (cur->type == 2)
 			tmp = ft_intercylinder(rt, cur);
+			//tmp = ft_intercylinder(rt, cur, rt->ray.dir, rt->cam.ori);
 		else if (cur->type == 3)
 			tmp = ft_intercone(rt, cur);
 		if (tmp > 0.001 && tmp < rt->dist)

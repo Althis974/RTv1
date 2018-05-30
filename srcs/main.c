@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/20 11:50:57 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/28 13:49:38 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/30 17:04:17 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 void	ft_initialization(t_env *rt)
 {
-	rt->aa = 2.0;
+	rt->aa = 1.0;
 	rt->nb_spot = 2.0;
 //	rt->cam.ori = (t_vec) {-10.0, 0.0, 10.0};
 	rt->cam.ori = (t_vec) {-25.0, 0.0, 0.0};
@@ -40,18 +40,26 @@ void	ft_initialization(t_env *rt)
 
 	/*	Scene 2	*/
 
-/*	rt->cur = malloc(sizeof(t_obj));
+	rt->cur = malloc(sizeof(t_obj));
 	rt->cur->next = malloc(sizeof(t_obj));
+	rt->cur->next->next = malloc(sizeof(t_obj));
 	rt->cur->type = 4;
 	rt->cur->pos = (t_vec) {0.0, 0.0, 0.0};
 	rt->cur->rot = (t_vec) {0.0, 1.0, 1.0};
 	rt->cur->col = (t_vec) {0.9, 0.9, 0.9};
 	rt->cur->size = 1;
 	rt->cur->pow = 0.99;
-	rt->cur->next->type = 3;
+	rt->cur->next->type = 2;
 	rt->cur->next->col = (t_vec) {1.0, 0.5, 0.5};
 	rt->cur->next->size = 1.0;
-	rt->cur->next->pos = (t_vec) {5.0, 0.0, 10.0};*/
+	rt->cur->next->pos = (t_vec) {4.0, 9.0, 0.0};
+	rt->cur->next->rot = (t_vec) {0.0, 0.0, 1.0};
+	rt->cur->next->next->type = 0;
+	rt->cur->next->next->pos = (t_vec){0.0, -10.0, 0.0};
+	rt->cur->next->next->rot = (t_vec){0.0, 0.1, 0.0};
+	rt->cur->next->next->col = (t_vec){0.75, 0.75, 0.75};
+	rt->cur->next->next->size = 1.0;
+	rt->cur->next->next->next = NULL;
 
 	/*	Scene 3	*/
 
@@ -74,6 +82,29 @@ void	ft_initialization(t_env *rt)
 	rt->cur->next->next->rot = (t_vec) {0.0, 1.0, 1.0};
 	rt->cur->next->next->size = 0.5;
 	rt->cur->next->next->pos = (t_vec) {5.0, 0.0, 10.0};
+	rt->cur->next->next->next = NULL;*/
+
+	/*	Scene 4	*/
+
+/*	rt->cur = malloc(sizeof(t_obj));
+	rt->cur->next = malloc(sizeof(t_obj));
+	rt->cur->next->next = malloc(sizeof(t_obj));
+	rt->cur->type = 4;
+	rt->cur->pos = (t_vec) {0.0, 0.0, 0.0};
+	rt->cur->rot = (t_vec) {0.0, 0.0, 0.0};
+	rt->cur->col = (t_vec) {0.9, 0.9, 0.9};
+	rt->cur->size = 1;
+	rt->cur->pow = 0.99;
+	rt->cur->next->type = 2;
+	rt->cur->next->col = (t_vec) {1.0, 0.5, 0.5};
+	rt->cur->next->size = 1.0;
+	rt->cur->next->pos = (t_vec) {5.0, 0.0, 0.0};
+	rt->cur->next->rot = (t_vec) {0.0, 0.0, 1.0};
+	rt->cur->next->next->type = 0;
+	rt->cur->next->next->pos = (t_vec){0.0, -10.0, 0.0};
+	rt->cur->next->next->rot = (t_vec){0.0, 1.0, 0.0};
+	rt->cur->next->next->col = (t_vec){0.75, 0.75, 0.75};
+	rt->cur->next->next->size = 1.0;
 	rt->cur->next->next->next = NULL;*/
 
 	/*	Scene 5	*/
@@ -102,7 +133,7 @@ void	ft_initialization(t_env *rt)
 
 	/*	Scene 6	*/
 
-	rt->cur = malloc(sizeof(t_obj));
+/*	rt->cur = malloc(sizeof(t_obj));
 	rt->cur->next = malloc(sizeof(t_obj));
 	rt->cur->next->next = malloc(sizeof(t_obj));
 	rt->cur->next->next->next = malloc(sizeof(t_obj));
@@ -133,7 +164,7 @@ void	ft_initialization(t_env *rt)
 	rt->cur->next->next->next->next->col = (t_vec){1.0, 1.0, 1.0};
 	rt->cur->next->next->next->next->size = 1.0;
 	rt->cur->next->next->next->next->pow = 0.99;
-	rt->cur->next->next->next->next->next = NULL;
+	rt->cur->next->next->next->next->next = NULL;*/
 }
 
 int		main(int ac, char **av)
