@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/17 13:58:26 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/29 14:08:18 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/07 11:10:19 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #include "../includes/rtv1.h"
 
 /*
-**	Translation of Lambert's law
+**	Translation of Lam
 */
 
 t_vec	ft_lambert(t_obj *obj, t_vec *pos, t_vec *normal)

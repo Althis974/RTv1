@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/03 15:26:27 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/29 14:08:18 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/07 11:10:19 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,6 +50,7 @@ void	ft_aa(t_env *rt, double x, double y)
 
 	p = 0.0;
 	ft_bzero(&rt->rgb, sizeof(t_vec));
+	ft_bzero(&rt->tab, sizeof(double*));
 	while (y < rt->aay + 1 && (x = rt->aax) > -1)
 	{
 		while (x < rt->aax + 1 && (p += 1) > 0)

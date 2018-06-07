@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/30 17:04:17 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/07 12:34:35 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,6 +37,14 @@
 **	Moved to Libft
 */
 
+typedef struct		s_matrix
+{
+	t_vec			r1;
+	t_vec			r2;
+	t_vec			r3;
+	int				on;
+}					t_matrix;
+
 /*
 **	[Object structure]
 **
@@ -55,6 +63,8 @@ typedef struct		s_obj
 	t_vec			pos;
 	t_vec			rot;
 	t_vec			col;
+	t_matrix		rota;
+	t_matrix		inv;
 	double			size;
 	double			pow;
 	struct s_obj	*next;
@@ -168,6 +178,16 @@ typedef struct		s_env
 	t_obj			*objs;
 	t_obj			*cur;
 	t_light			light;
+
+	double 			t0;
+	double 			t1;
+	double 			a;
+	double			b;
+	double 			c;
+	double 			t;
+	double 			*tab;
+	t_vec			di;
+	t_obj			*lite;
 }					t_env;
 
 /*
@@ -216,16 +236,20 @@ void				ft_get_diffuse(t_env *rt, t_vec *pos);
 void				ft_get_specular(t_env *rt, t_vec *pos);
 void				ft_set_normal(t_env *rt, t_vec *pos);
 
+int		ft_shadow(t_env *rt, t_obj *tmp, t_obj *light, t_vec pos);
+
 /*
 **	Functions that take care of objects intersections
 */
 
 double				ft_interplane(t_env *rt, t_obj *obj);
-//double	ft_interplane(t_env *rt, t_obj *obj, t_vec ray, t_vec pos);
+double	ft_inter_plane(t_env *rt, t_obj *obj, t_vec ray, t_vec pos);
 double				ft_intersphere(t_env *rt, t_obj *obj);
+double	ft_inter_sphere(t_env *rt, t_obj *tmp, t_vec ray, t_vec pos);
 double				ft_intercylinder(t_env *rt, t_obj *obj);
-//double	ft_intercylinder(t_env *rt, t_obj *obj, t_vec ray, t_vec pos);
+double	ft_inter_cylinder(t_env *rt, t_obj *obj, t_vec ray, t_vec pos);
 double				ft_intercone(t_env *rt, t_obj *obj);
+double	ft_inter_cone(t_env *rt, t_obj *tmp, t_vec ray, t_vec pos);
 
 /*
 **	Functions that take care of shadow intersections
@@ -252,6 +276,10 @@ double				ft_phong(t_env *rt, t_obj *obj, t_vec *pos);
 int					ft_getting_keys(int key, t_env *rt);
 //int		ft_getting_keys(int key, t_env *rt, double x, double y);
 void				ft_moove(int key, t_env *rt);
-//void	ft_moove(int key, t_env *rt, double x, double y);
+//void	ft_moove(int key, t_env *rt, double x, double y)
+
+t_vec	find_cylinder_normal(t_env *rt, t_obj *objs);
+t_vec	find_cone_normal(t_env *rt, t_obj *obj);
+t_vec	vector_sum(t_vec a, char s, t_vec b);
 
 #endif

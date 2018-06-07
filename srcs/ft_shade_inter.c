@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/17 11:25:12 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/30 17:16:29 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/07 11:10:20 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,6 +37,24 @@ int		ft_shadsphere(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir, double len)
 		return ((d > 0.001) && (d < len));
 	}
 	return (0);
+}
+
+double	ft_inter_sphere(t_env *rt, t_obj *tmp, t_vec ray, t_vec pos)
+{
+	double disc;
+
+	rt->di = ft_vsub(&pos, &tmp->pos);
+	rt->a = ft_vdot(&ray, &ray);
+	rt->b = 2 * ft_vdot(&ray, &rt->di);
+	rt->c = ft_vdot(&rt->di, &rt->di) - (tmp->size * tmp->size);
+	disc = rt->b * rt->b - 4 * rt->a * rt->c;
+	if (disc < 0)
+		return (-1);
+	rt->t0 = (-rt->b + sqrtf(disc)) / (2 * rt->a);
+	rt->t1 = (-rt->b - sqrtf(disc)) / (2 * rt->a);
+	if (rt->t0 > rt->t1)
+		rt->t0 = rt->t1;
+	return (rt->t0);
 }
 
 /*
