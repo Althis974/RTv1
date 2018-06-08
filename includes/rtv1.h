@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/07 12:34:35 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/08 15:27:07 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -167,34 +167,27 @@ typedef struct		s_env
 	int				th;
 	int				aax;
 	int				aay;
+	double			aa;
+	double			t1;
+	double			t2;
 	double			dist;
 	double			nb_spot;
-	double			aa;
 	t_mlx			mlx;
 	t_cam			cam;
 	t_ray			ray;
 	t_vec			col;
 	t_vec			rgb;
-	t_obj			*objs;
 	t_obj			*cur;
+	t_obj			*objs;
+	t_vec			center;
 	t_light			light;
-
-	double 			t0;
-	double 			t1;
-	double 			a;
-	double			b;
-	double 			c;
-	double 			t;
-	double 			*tab;
-	t_vec			di;
-	t_obj			*lite;
 }					t_env;
 
 /*
 **  Initialize environment.
 */
 
-void				ft_initialization(t_env *rt);
+void				ft_initialization(t_env *rt, int scene);
 int					ft_env_init(t_env *rt);
 int					ft_create(t_env *rt);
 
@@ -224,7 +217,8 @@ t_obj				*ft_get_obj_inter(t_env *rt);
 **	Functions concerning shadow
 */
 
-double				ft_get_shade_inter(t_env *rt, t_vec *pos, t_vec *objpos);
+int					ft_get_shade_inter(t_env *rt, t_obj *light, t_vec pos);
+double				ft_intershade(t_env *rt, t_obj *objs, t_vec ray, t_vec pos);
 
 /*
 **	Functions concerning light
@@ -236,31 +230,23 @@ void				ft_get_diffuse(t_env *rt, t_vec *pos);
 void				ft_get_specular(t_env *rt, t_vec *pos);
 void				ft_set_normal(t_env *rt, t_vec *pos);
 
-int		ft_shadow(t_env *rt, t_obj *tmp, t_obj *light, t_vec pos);
-
 /*
 **	Functions that take care of objects intersections
 */
 
 double				ft_interplane(t_env *rt, t_obj *obj);
-double	ft_inter_plane(t_env *rt, t_obj *obj, t_vec ray, t_vec pos);
 double				ft_intersphere(t_env *rt, t_obj *obj);
-double	ft_inter_sphere(t_env *rt, t_obj *tmp, t_vec ray, t_vec pos);
 double				ft_intercylinder(t_env *rt, t_obj *obj);
-double	ft_inter_cylinder(t_env *rt, t_obj *obj, t_vec ray, t_vec pos);
 double				ft_intercone(t_env *rt, t_obj *obj);
-double	ft_inter_cone(t_env *rt, t_obj *tmp, t_vec ray, t_vec pos);
 
 /*
 **	Functions that take care of shadow intersections
 */
 
-int					ft_shadsphere(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir, \
-					double len);
-int					ft_shadcylinder(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir,\
-					double len);
-int					ft_shadcone(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir, \
-					double len);
+double				ft_shadplane(t_env *rt, t_obj *obj, t_vec ray, t_vec pos);
+double				ft_shadsphere(t_env *rt, t_obj *obj, t_vec ray, t_vec pos);
+double				ft_shadcylindr(t_env *rt, t_obj *obj, t_vec ray, t_vec pos);
+double				ft_shadcone(t_env *rt, t_obj *obj, t_vec ray, t_vec pos);
 
 /*
 **	Function of existing algorithms
@@ -277,9 +263,5 @@ int					ft_getting_keys(int key, t_env *rt);
 //int		ft_getting_keys(int key, t_env *rt, double x, double y);
 void				ft_moove(int key, t_env *rt);
 //void	ft_moove(int key, t_env *rt, double x, double y)
-
-t_vec	find_cylinder_normal(t_env *rt, t_obj *objs);
-t_vec	find_cone_normal(t_env *rt, t_obj *obj);
-t_vec	vector_sum(t_vec a, char s, t_vec b);
 
 #endif

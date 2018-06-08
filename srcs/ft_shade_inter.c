@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/17 11:25:12 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/07 11:10:20 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/08 15:17:19 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,10 +15,24 @@
 
 /*
 **	Return distance traveled by the ray before a shadow intersection
+**	in case of a plane
+*/
+
+double	ft_shadplane(t_env *rt, t_obj *obj, t_vec ray, t_vec pos)
+{
+	rt->t1 = ((ft_vdot(&obj->rot, &obj->pos) - ft_vdot(&obj->rot, &pos)) / \
+	ft_vdot(&obj->rot, &ray));
+	if (rt->t1 < 0.001)
+		return (-1.0);
+	return (rt->t1);
+}
+
+/*
+**	Return distance traveled by the ray before a shadow intersection
 **	in case of a sphere
 */
 
-int		ft_shadsphere(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir, double len)
+double	ft_shadsphere(t_env *rt, t_obj *obj, t_vec ray, t_vec pos)
 {
 	t_vec	center;
 	double	a;
@@ -26,35 +40,18 @@ int		ft_shadsphere(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir, double len)
 	double	c;
 	double	d;
 
-	center = ft_vsub(ray_ori, &obj->pos);
-	a = ft_vdot(ray_dir, ray_dir);
-	b = ft_vdot(&center, ray_dir);
-	c = ft_vdot(&center, &center) - obj->size * obj->size;
-	d = b * b - a * c;
-	if (d > 0.001)
-	{
-		d = (-b - sqrt(d)) / a;
-		return ((d > 0.001) && (d < len));
-	}
-	return (0);
-}
-
-double	ft_inter_sphere(t_env *rt, t_obj *tmp, t_vec ray, t_vec pos)
-{
-	double disc;
-
-	rt->di = ft_vsub(&pos, &tmp->pos);
-	rt->a = ft_vdot(&ray, &ray);
-	rt->b = 2 * ft_vdot(&ray, &rt->di);
-	rt->c = ft_vdot(&rt->di, &rt->di) - (tmp->size * tmp->size);
-	disc = rt->b * rt->b - 4 * rt->a * rt->c;
-	if (disc < 0)
-		return (-1);
-	rt->t0 = (-rt->b + sqrtf(disc)) / (2 * rt->a);
-	rt->t1 = (-rt->b - sqrtf(disc)) / (2 * rt->a);
-	if (rt->t0 > rt->t1)
-		rt->t0 = rt->t1;
-	return (rt->t0);
+	center = ft_vsub(&pos, &obj->pos);
+	a = ft_vdot(&ray, &ray);
+	b = 2 * ft_vdot(&ray, &center);
+	c = ft_vdot(&center, &center) - (obj->size * obj->size);
+	d = b * b - 4 * a * c;
+	if (d < 0.0)
+		return (-1.0);
+	rt->t1 = (-b + sqrtf(d)) / (2 * a);
+	rt->t2 = (-b - sqrtf(d)) / (2 * a);
+	if (rt->t1 > rt->t2)
+		rt->t1 = rt->t2;
+	return (rt->t1);
 }
 
 /*
@@ -62,25 +59,28 @@ double	ft_inter_sphere(t_env *rt, t_obj *tmp, t_vec ray, t_vec pos)
 **	in case of a cylinder
 */
 
-int		ft_shadcylinder(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir, double len)
+double	ft_shadcylindr(t_env *rt, t_obj *obj, t_vec ray, t_vec pos)
 {
-	t_vec	center;
 	double	a;
 	double	b;
 	double	c;
 	double	d;
 
-	center = ft_vsub(ray_ori, &obj->pos);
-	a = ray_dir->x * ray_dir->x + ray_dir->z * ray_dir->z;
-	b = ray_dir->x * center.x + ray_dir->z * center.z;
-	c = center.x * center.x + center.z * center.z - obj->size * obj->size;
-	d = b * b - a * c;
-	if (d > 0.001)
-	{
-		d = (-b - sqrt(d)) / a;
-		return ((d > 0.001) && (d < len));
-	}
-	return (0);
+	rt->center = ft_vsub(&pos, &obj->pos);
+	ft_vnorm(&obj->rot);
+	a = ft_vdot(&ray, &ray) - pow(ft_vdot(&ray, &obj->rot), 2);
+	b = 2 * (ft_vdot(&ray, &rt->center) - (ft_vdot(&ray, &obj->rot) * \
+	ft_vdot(&rt->center, &obj->rot)));
+	c = ft_vdot(&rt->center, &rt->center) - pow(ft_vdot(&rt->center, \
+	&obj->rot), 2) - pow(obj->size, 2);
+	d = b * b - 4 * a * c;
+	if (d < 0)
+		return (-1);
+	rt->t1 = (-b + sqrtf(d)) / (2 * a);
+	rt->t2 = (-b - sqrtf(d)) / (2 * a);
+	if (rt->t1 > rt->t2)
+		rt->t1 = rt->t2;
+	return (rt->t1);
 }
 
 /*
@@ -88,24 +88,27 @@ int		ft_shadcylinder(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir, double len)
 **	in case of a cone
 */
 
-int		ft_shadcone(t_obj *obj, t_vec *ray_ori, t_vec *ray_dir, double len)
+double	ft_shadcone(t_env *rt, t_obj *obj, t_vec ray, t_vec pos)
 {
-	t_vec	center;
 	double	a;
 	double	b;
 	double	c;
 	double	d;
 
-	center = ft_vsub(ray_ori, &obj->pos);
-	a = ray_dir->x * ray_dir->x - ray_dir->y * ray_dir->y + ray_dir->z * \
-	ray_dir->z;
-	b = ray_dir->x * center.x - ray_dir->y * center.y + ray_dir->z * center.z;
-	c = center.x * center.x + center.z * center.z - center.y * center.y;
-	d = b * b - a * c;
-	if (d > 0.001)
-	{
-		d = (-b - sqrt(d)) / a;
-		return ((d > 0.001) && (d < len));
-	}
-	return (0);
+	rt->center = ft_vsub(&pos, &obj->pos);
+	ft_vnorm(&obj->rot);
+	a = ft_vdot(&ray, &ray) - (1 + pow(obj->size, 2)) * \
+	pow(ft_vdot(&ray, &obj->rot), 2);
+	b = 2 * (ft_vdot(&ray, &rt->center) - (1 + pow(obj->size, 2)) * \
+	ft_vdot(&ray, &obj->rot) * ft_vdot(&rt->center, &obj->rot));
+	c = ft_vdot(&rt->center, &rt->center) - (1 + pow(obj->size, 2)) * \
+	pow(ft_vdot(&rt->center, &obj->rot), 2);
+	d = b * b - 4 * a * c;
+	if (d < 0)
+		return (-1);
+	rt->t1 = (-b + sqrtf(d)) / (2 * a);
+	rt->t2 = (-b - sqrtf(d)) / (2 * a);
+	if (rt->t1 > rt->t2)
+		rt->t1 = rt->t2;
+	return (rt->t1);
 }

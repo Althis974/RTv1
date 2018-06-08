@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/16 16:18:52 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/07 12:00:13 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/08 14:12:55 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,8 +21,6 @@ void	ft_get_obj_col(t_env *rt)
 {
 	t_vec	pos;
 
-	if (!(rt->tab = (double*)malloc(sizeof(double) * 4)))
-		return ;
 	rt->dist = 1000.0;
 	rt->objs = ft_get_obj_inter(rt);
 	if (rt->dist > 0.001 && rt->objs)
@@ -56,15 +54,11 @@ t_obj	*ft_get_obj_inter(t_env *rt)
 	{
 		if (cur->type == 0)
 			tmp = ft_interplane(rt, cur);
-			//tmp = ft_inter_plane(rt, cur, rt->ray.dir, rt->cam.ori);
 		else if (cur->type == 1)
 			tmp = ft_intersphere(rt, cur);
-			//tmp = ft_inter_sphere(rt, cur, rt->ray.dir, rt->cam.ori);
 		else if (cur->type == 2)
-			//tmp = ft_intercylinder(rt, cur);
-			tmp = ft_inter_cylinder(rt, cur, rt->ray.dir, rt->cam.ori);
+			tmp = ft_intercylinder(rt, cur);
 		else if (cur->type == 3)
-			//tmp = ft_inter_cone(rt, cur, rt->ray.dir, rt->cam.ori);
 			tmp = ft_intercone(rt, cur);
 		if (tmp > 0.001 && tmp < rt->dist)
 		{

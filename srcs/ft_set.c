@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/14 14:55:20 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/07 12:22:11 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/08 15:17:19 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,27 +43,20 @@ void	ft_set_cam(t_env *rt, double x, double y)
 
 void	ft_set_normal(t_env *rt, t_vec *pos)
 {
-	t_vec	temp;
-	t_vec	temp2;
+	t_vec	tmp;
+	t_vec	tmp2;
 
 	rt->light.normal = (t_vec){0.0, 1.0, 0.0};
 	if (rt->objs->type == 1)
 		rt->light.normal = ft_vsub(pos, &rt->objs->pos);
 	else if (rt->objs->type == 2 || rt->objs->type == 3)
-//		rt->light.normal = (t_vec){pos->x - rt->objs->pos.x, 0.0, pos->z - \
-//		rt->objs->pos.z};
-//	else if (rt->objs->type == 2 || rt->objs->type == 3)
-//		rt->light.normal = find_cylinder_normal(rt, rt->objs);
-//	else if (rt->objs->type == 3)
-//		rt->light.normal = find_cone_normal(rt, rt->objs);
 	{
-		temp = ft_vmulx(&rt->objs->rot,
-							  (ft_vdot(&rt->ray.dir, &rt->objs->rot) * rt->t0
-							   + ft_vdot(&rt->di, &rt->objs->rot)));
+		tmp = ft_vmulx(&rt->objs->rot, (ft_vdot(&rt->ray.dir, &rt->objs->rot) *\
+		rt->t1 + ft_vdot(&rt->center, &rt->objs->rot)));
 		if (rt->objs->type == 3)
-			temp = ft_vmulx(&temp, (1 + pow(tan(rt->objs->size), 2)));
-		temp2 = ft_vsub(pos, &rt->objs->pos);
-		rt->light.normal = ft_vsub(&temp2, &temp);
+			tmp = ft_vmulx(&tmp, (1 + pow(tan(rt->objs->size), 2)));
+		tmp2 = ft_vsub(pos, &rt->objs->pos);
+		rt->light.normal = ft_vsub(&tmp2, &tmp);
 	}
 	ft_vnorm(&rt->light.normal);
 }
