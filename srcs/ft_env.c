@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/03 12:29:53 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/08 09:31:16 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/11 12:55:39 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@ int		ft_env_init(t_env *rt)
 	mlx_expose_hook(rt->mlx.win, ft_create, rt);
 //	mlx_hook(rt->mlx.win, MOTION, 0, ft_motion, rt);
 	mlx_hook(rt->mlx.win, 2, 0, ft_getting_keys, rt);
-//	mlx_mouse_hook(rt->mlx.win, ft_mouse, rt);
+	mlx_mouse_hook(rt->mlx.win, ft_mouse, rt);
 	mlx_loop(rt->mlx.mlx_ptr);
 	return (0);
 }
@@ -65,4 +65,15 @@ void	init_thread(t_env *rt)
 	i = -1;
 	while (++i < THREADS)
 		pthread_join(th[i], NULL);
+}
+
+/*
+**	Launching event
+*/
+
+void	ft_launch(t_env *rt)
+{
+	mlx_destroy_image(rt->mlx.mlx_ptr, rt->mlx.img.img_ptr);
+	mlx_clear_window(rt->mlx.mlx_ptr, rt->mlx.win);
+	ft_create(rt);
 }

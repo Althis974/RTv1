@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/08 15:27:07 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/11 14:04:04 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,17 +24,19 @@
 # define MAX_W 1000
 # define THREADS 8
 # define FOV 2.0
+# define R1 rt->matrix.r1
+# define R2 rt->matrix.r2
+# define R3 rt->matrix.r3
+# define CAMD rt->cam.dir
+# define CAMO rt->cam.ori
+# define CAMX rt->cam.ori.x
+# define CAMY rt->cam.ori.y
+# define CAMZ rt->cam.ori.z
 
 /*
-**	[Color structure]
+**	[Matrix structure]
 **
-**	/!\ Now considered as vector that correspond to color coefficient /!\
-*/
-
-/*
-**	[Vector structure]
-**
-**	Moved to Libft
+**	Rows of a matrix
 */
 
 typedef struct		s_matrix
@@ -42,7 +44,6 @@ typedef struct		s_matrix
 	t_vec			r1;
 	t_vec			r2;
 	t_vec			r3;
-	int				on;
 }					t_matrix;
 
 /*
@@ -63,8 +64,6 @@ typedef struct		s_obj
 	t_vec			pos;
 	t_vec			rot;
 	t_vec			col;
-	t_matrix		rota;
-	t_matrix		inv;
 	double			size;
 	double			pow;
 	struct s_obj	*next;
@@ -103,8 +102,6 @@ typedef struct		s_ray
 **	spec	=	color of the light of a specular reflection
 **	lite	=	color of the object itself under pure white light
 **	shade	=	distance under the shadow
-**
-**	/!\ Parsed as an object. This structure is used for calculation /!\
 */
 
 typedef struct		s_light
@@ -149,17 +146,20 @@ typedef struct		s_mlx
 **	th		=	number of thread
 **	aax		=	x storage for anti-aliasing
 **	aay		=	y storage for anti-aliasing
+**	aa		=	anti-aliasing value
+**	t1		=	first solution of equation
+**	t2		=	second solution of equation
 **	dist	=	distance traveled by the ray
 **	nb_spot	=	number of spotlight from parsing (multi-spots bonus)
-**	aa		=	anti-aliasing value
 **	mlx		=	basic mlx structure
 **	cam		=	camera structure
 **	ray		=	ray structure
 **	col		=	temporary color coefficient
 **	rgb		=	final color coefficient
-**	*objs	=	list of objects from parsing
 **	*cur	=	list to work on current object
+**	*objs	=	list of objects from parsing
 **	light	=	light structure
+**	matrix	=	matrix used for event
 */
 
 typedef struct		s_env
@@ -167,6 +167,7 @@ typedef struct		s_env
 	int				th;
 	int				aax;
 	int				aay;
+	int				zoom;
 	double			aa;
 	double			t1;
 	double			t2;
@@ -181,6 +182,7 @@ typedef struct		s_env
 	t_obj			*objs;
 	t_vec			center;
 	t_light			light;
+	t_matrix		matrix;
 }					t_env;
 
 /*
@@ -190,6 +192,7 @@ typedef struct		s_env
 void				ft_initialization(t_env *rt, int scene);
 int					ft_env_init(t_env *rt);
 int					ft_create(t_env *rt);
+void				ft_launch(t_env *rt);
 
 /*
 **  Functions that take care of tracing.
@@ -260,8 +263,8 @@ double				ft_phong(t_env *rt, t_obj *obj, t_vec *pos);
 */
 
 int					ft_getting_keys(int key, t_env *rt);
-//int		ft_getting_keys(int key, t_env *rt, double x, double y);
+void				ft_rotate(int key, t_env *rt);
 void				ft_moove(int key, t_env *rt);
-//void	ft_moove(int key, t_env *rt, double x, double y)
+int					ft_mouse(int button, int x, int y, t_env *rt);
 
 #endif
