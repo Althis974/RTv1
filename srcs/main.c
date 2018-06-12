@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/20 11:50:57 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/08 13:49:03 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/12 16:46:39 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -246,7 +246,7 @@ void	ft_initialization(t_env *rt, int scene)
 		rt->cur->pos = (t_vec) {-5.0, 0.0, 10.0};
 		rt->cur->col = (t_vec) {1.0, 1.0, 1.0};
 		rt->cur->size = 1.0;
-		rt->cur->pow = 0.99;
+		rt->cur->pow = 0.80;
 		rt->cur->next->type = 3;
 		rt->cur->next->col = (t_vec) {1.0, 0.5, 0.5};
 		rt->cur->next->size = 0.5;
@@ -277,7 +277,7 @@ void	ft_initialization(t_env *rt, int scene)
 		rt->cur->next->next->next->next->next->next->col = (t_vec) {0.0, 0.7,
 																	1.0};
 		rt->cur->next->next->next->next->next->next->size = 1.0;
-		rt->cur->next->next->next->next->next->next->pow = 0.99;
+		rt->cur->next->next->next->next->next->next->pow = 0.80;
 		rt->cur->next->next->next->size = 1.0;
 		rt->cur->next->next->next->next->next->next->next->type = 1;
 		rt->cur->next->next->next->next->next->next->next->pos = (t_vec) {5.0,
@@ -303,7 +303,7 @@ int		main(int ac, char **av)
 	ft_bzero(&rt, sizeof(t_env));
 	ft_initialization(&rt, ft_atoi(av[1]));
 	ft_env_init(&rt);
-	free(&rt);
-	ft_bzero(&rt, sizeof(t_env));
+//	free(&rt);
+//	ft_bzero(&rt, sizeof(t_env));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/11 14:04:04 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/12 14:32:53 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -266,5 +266,7 @@ int					ft_getting_keys(int key, t_env *rt);
 void				ft_rotate(int key, t_env *rt);
 void				ft_moove(int key, t_env *rt);
 int					ft_mouse(int button, int x, int y, t_env *rt);
+void				ft_zoom(int button, int x, int y, t_env *rt);
+t_obj				*ft_select(t_vec pos, double x, double y, t_env *rt);
 
 #endif

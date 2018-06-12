@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/17 13:58:26 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/08 12:40:54 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/12 16:17:28 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@ t_vec	ft_lambert(t_obj *obj, t_vec *pos, t_vec *normal)
 	double	dist;
 
 	dist = ft_vdist(pos, &obj->pos);
-	dist = ft_reg(sqrtf(1.0 / (dist * (1.0 - obj->pow))), 0.0, 1.0);
+	dist = ft_reg(sqrt(1.0 / (dist * (1.0 - obj->pow))), 0.0, 1.0);
 	lite = ft_vsub(&obj->pos, pos);
 	ft_vnorm(&lite);
 	val = ft_reg(ft_vdot(normal, &lite), 0.0, 1.0);

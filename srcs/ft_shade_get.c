@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/17 11:24:26 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/08 15:28:58 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/12 16:34:01 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,12 @@ void	ft_get_shade(t_env *rt, t_vec *pos)
 		{
 			tmp = ft_get_shade_inter(rt, obj, *pos);
 			if (tmp == 1)
-				rt->light.shade -= (obj->pow + rt->nb_spot) / FOV;
+			{
+				if (rt->nb_spot < 0.5)
+					rt->light.shade -= (obj->pow + rt->nb_spot) / FOV;
+				else
+					rt->light.shade -= (obj->pow + (rt->nb_spot / 2.0)) / FOV;
+			}
 		}
 		obj = obj->next;
 	}
@@ -47,7 +52,6 @@ int		ft_get_shade_inter(t_env *rt, t_obj *light, t_vec pos)
 	t_obj	*objs;
 	double	tmp;
 
-	tmp = 0.0;
 	objs = rt->cur;
 	ray = ft_vsub(&light->pos, &pos);
 	rt->dist = sqrtf(ft_vdot(&ray, &ray));

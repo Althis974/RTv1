@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/16 16:19:43 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/08 09:31:16 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/12 16:45:03 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,7 +50,7 @@ void	ft_get_diffuse(t_env *rt, t_vec *pos)
 		}
 		obj = obj->next;
 	}
-	rt->light.lite = ft_vmulx(&rt->light.lite, rt->nb_spot);
+	rt->light.lite = ft_vmulx(&rt->light.lite, 1.0);
 	ft_vreg(&rt->light.lite, 0.0, 1.0);
 }
 
