@@ -17,7 +17,7 @@ LIBX_DIR	=	./minilibx_macos
 HEADER		=	./includes/
 FILENAMES	=	main.c ft_env.c ft_trace.c ft_obj_get.c ft_obj_inter.c ft_set.c
 FILENAMES   +=  ft_light_get.c ft_shade_get.c ft_shade_inter.c ft_algo.c
-FILENAMES   +=  ft_keycode.c ft_mouse.c
+FILENAMES   +=  ft_keycode.c ft_mouse.c ft_display.c
 
 SOURCES		=	$(addprefix srcs/, $(FILENAMES))
 OBJECTS		=	$(addprefix build/, $(FILENAMES:.c=.o)) 

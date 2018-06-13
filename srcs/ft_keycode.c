@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/17 16:39:34 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/12 15:04:47 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/13 13:13:43 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,11 @@ int		ft_getting_keys(int key, t_env *rt)
 		ft_moove(key, rt);
 	if (key == A || key == D || key == W || key == S)
 		ft_rotate(key, rt);
-	ft_launch(rt);
+	if (key == MORE && rt->aa < 4)
+		rt->aa *= 2;
+	if (key == LESS && rt->aa > 1)
+		rt->aa /= 2;
+	ft_launch(rt, 1);
 	return (0);
 }
 

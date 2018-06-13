@@ -159,6 +159,7 @@ int					get_next_line(const int fd, char **line);
 int					ft_word_count(const char *s, char c);
 int					**ft_tab2d_init(size_t x, size_t y);
 double				ft_reg(double x, double min, double max);
+char				*ft_ftoa(double nb);
 
 t_vec				ft_vadd(t_vec *v1, t_vec *v2);
 t_vec				ft_vsub(t_vec *v1, t_vec *v2);

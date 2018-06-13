@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/12 14:32:53 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/13 14:40:56 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,6 +32,7 @@
 # define CAMX rt->cam.ori.x
 # define CAMY rt->cam.ori.y
 # define CAMZ rt->cam.ori.z
+# define PUT mlx_string_put
 
 /*
 **	[Matrix structure]
@@ -168,6 +169,7 @@ typedef struct		s_env
 	int				aax;
 	int				aay;
 	int				zoom;
+	int				select;
 	double			aa;
 	double			t1;
 	double			t2;
@@ -192,7 +194,7 @@ typedef struct		s_env
 void				ft_initialization(t_env *rt, int scene);
 int					ft_env_init(t_env *rt);
 int					ft_create(t_env *rt);
-void				ft_launch(t_env *rt);
+void				ft_launch(t_env *rt, int mode);
 
 /*
 **  Functions that take care of tracing.
@@ -268,5 +270,13 @@ void				ft_moove(int key, t_env *rt);
 int					ft_mouse(int button, int x, int y, t_env *rt);
 void				ft_zoom(int button, int x, int y, t_env *rt);
 t_obj				*ft_select(t_vec pos, double x, double y, t_env *rt);
+
+/*
+**	Functions that display
+*/
+
+void				ft_display(t_env *rt);
+void				ft_header(t_env *rt);
+void				ft_obj_infos(t_env *rt, t_obj *tmp);
 
 #endif

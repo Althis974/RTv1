@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/03 12:29:53 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/12 15:48:36 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/13 11:59:31 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@
 int		ft_env_init(t_env *rt)
 {
 	rt->mlx.mlx_ptr = mlx_init();
-	rt->mlx.win = mlx_new_window(rt->mlx.mlx_ptr, MAX_W + 250, MAX_H, "RTv1");
+	rt->mlx.win = mlx_new_window(rt->mlx.mlx_ptr, MAX_W + 350, MAX_H, "RTv1");
 	rt->nb_spot = 1.0 / rt->nb_spot;
 	mlx_expose_hook(rt->mlx.win, ft_create, rt);
 //	mlx_hook(rt->mlx.win, MOTION, 0, ft_motion, rt);
@@ -42,6 +42,7 @@ int		ft_create(t_env *rt)
 	init_thread(rt);
 	mlx_put_image_to_window(rt->mlx.mlx_ptr, rt->mlx.win, rt->mlx.img.img_ptr, \
 	0, 0);
+	ft_display(rt);
 	return (0);
 }
 
@@ -71,9 +72,10 @@ void	init_thread(t_env *rt)
 **	Launching events
 */
 
-void	ft_launch(t_env *rt)
+void	ft_launch(t_env *rt, int mode)
 {
 	mlx_destroy_image(rt->mlx.mlx_ptr, rt->mlx.img.img_ptr);
-	mlx_clear_window(rt->mlx.mlx_ptr, rt->mlx.win);
+	if (!mode)
+		mlx_clear_window(rt->mlx.mlx_ptr, rt->mlx.win);
 	ft_create(rt);
 }
