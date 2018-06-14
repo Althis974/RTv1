@@ -6,7 +6,7 @@
 #    By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/03/14 14:34:00 by rlossy       #+#   ##    ##    #+#        #
-#   Updated: 2018/06/12 14:32:54 by rlossy      ###    #+. /#+    ###.fr     # #
+#   Updated: 2018/06/14 14:15:10 by rlossy      ###    #+. /#+    ###.fr     # #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -17,7 +17,7 @@ LIBX_DIR	=	./minilibx_macos
 HEADER		=	./includes/
 FILENAMES	=	main.c ft_env.c ft_trace.c ft_obj_get.c ft_obj_inter.c ft_set.c
 FILENAMES   +=  ft_light_get.c ft_shade_get.c ft_shade_inter.c ft_algo.c
-FILENAMES   +=  ft_keycode.c ft_mouse.c ft_display.c
+FILENAMES   +=  ft_keycode.c ft_mouse.c ft_display.c ft_scene.c ft_scene2.c
 
 SOURCES		=	$(addprefix srcs/, $(FILENAMES))
 OBJECTS		=	$(addprefix build/, $(FILENAMES:.c=.o)) 

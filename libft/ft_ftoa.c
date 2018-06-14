@@ -13,7 +13,7 @@
 
 #include "libft.h"
 
-static long get_len(double nb)
+static long		get_len(double nb)
 {
 	long	size;
 
@@ -36,7 +36,7 @@ static long get_len(double nb)
 	return (++size);
 }
 
-char		*ft_ftoa(double nb)
+char			*ft_ftoa(double nb)
 {
 	double	n;
 	char	*res;

@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/13 10:41:36 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/13 16:54:17 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/14 15:45:35 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,18 +20,19 @@
 void		ft_display(t_env *rt)
 {
 	ft_header(rt);
+	rt->s = ft_strjoin("Anti-Aliasing : x", ft_ftoa(rt->aa), 2);
 	if (rt->aa == 1.0)
 		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1080, 210, 0xe60000,
 			"Anti-Aliasing : OFF");
 	else
-		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1080, 210, 0x329932,
-			ft_strjoin("Anti-Aliasing : x", ft_ftoa(rt->aa)));
+		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1080, 210, 0x329932, rt->s);
+	free(rt->s);
 	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1010, 260, 0xffa500,
 		"LEFT CLICK  : Select OBJ");
 	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1010, 285, 0xffa500,
 		"RIGHT CLICK : Deselect OBJ");
 	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1010, 310, 0xffa500,
-		"^/</>/v     : Move CAM/OBJ");
+		"^/</v/>     : Move CAM/OBJ");
 	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1010, 335, 0xffa500,
 		"W/A/S/D     : Rotate CAM/OBJ");
 	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1010, 360, 0xffa500,
@@ -42,7 +43,7 @@ void		ft_display(t_env *rt)
 		"ESC         : Exit");
 	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1010, 460, 0xffa500,
 		"___________________________________");
-	ft_footer(rt);
+	ft_cam_infos(rt);
 }
 
 /*
@@ -77,44 +78,82 @@ void		ft_header(t_env *rt)
 		"___________________________________");
 }
 
-void		ft_footer(t_env	*rt)
-{
+/*
+**	Display information about camera
+*/
 
+void		ft_cam_infos(t_env *rt)
+{
+	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1050, 510, 0x800080,
+		" _______ _______ _______ ");
+	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1050, 525, 0x800080,
+		"|\\     /|\\     /|\\     /|");
+	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1050, 540, 0x800080,
+		"| +---+ | +---+ | +---+ |");
+	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1050, 555, 0x800080,
+		"| | C | | | A | | | M | |");
+	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1050, 570, 0x800080,
+		"| +---+ | +---+ | +---+ |");
+	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1050, 585, 0x800080,
+		"|/_____\\|/_____\\|/_____\\|");
+	rt->s = ft_strjoin("ori  : ", (ft_strjoin(ft_ftoa(rt->cam.ori.x), \
+			(ft_strjoin(" ", (ft_strjoin(ft_ftoa(rt->cam.ori.y), \
+			(ft_strjoin(" ", ft_ftoa(rt->cam.ori.z), 2)), 3)), 2)), 3)), 2);
+	free(rt->s);
+	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1075, 635, 0x800080, rt->s);
+	rt->s = ft_strjoin("dir  : ", (ft_strjoin(ft_ftoa(rt->cam.dir.x), \
+			(ft_strjoin(" ", (ft_strjoin(ft_ftoa(rt->cam.dir.y), \
+			(ft_strjoin(" ", ft_ftoa(rt->cam.dir.z), 2)), 3)), 2)), 3)), 2);
+	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1075, 660, 0x800080, rt->s);
+	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1000, 710, 0xffa500,
+		"___________________________________");
+	free(rt->s);
 }
 
 /*
-**	Display object infos
+**	Display information about selected object
 */
 
-void		ft_obj_infos(t_env *rt, t_obj *tmp)
+void		ft_obj_infos(t_env *rt)
 {
-	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1100, 500, 0x00FEDC,
+	ft_footer(rt);
+	rt->s = ft_strjoin("pos  : ", (ft_strjoin(ft_ftoa(rt->tmp->pos.x), \
+			(ft_strjoin(" ", (ft_strjoin(ft_ftoa(rt->tmp->pos.y), \
+			(ft_strjoin(" ", ft_ftoa(rt->tmp->pos.z), 2)), 3)), 2)), 3)), 2);
+	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1075, 857, 0x00FEDC, rt->s);
+	free(rt->s);
+	rt->s = ft_strjoin("rot  : ", (ft_strjoin(ft_ftoa(rt->tmp->rot.x), \
+	(ft_strjoin(" ", (ft_strjoin(ft_ftoa(rt->tmp->rot.y), \
+	(ft_strjoin(" ", ft_ftoa(rt->tmp->rot.z), 2)), 3)), 2)), 3)), 2);
+	if (rt->tmp->type == 0 || rt->tmp->type == 2 || rt->tmp->type == 3)
+		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1075, 882, 0x00FEDC, rt->s);
+	free(rt->s);
+	rt->s = ft_strjoin("size : ", ft_ftoa(rt->tmp->size), 2);
+	if (rt->tmp->type == 2 || rt->tmp->type == 3)
+		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1075, 907, 0x00FEDC, rt->s);
+	else if (rt->tmp->type == 1)
+		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1075, 882, 0x00FEDC, rt->s);
+	free(rt->s);
+}
+
+/*
+**	Display footer
+*/
+
+void		ft_footer(t_env *rt)
+{
+	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1100, 760, 0x00FEDC,
 		"+-+-+-+-+-+-+-+");
-	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1100, 511, 0x00FEDC,
+	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1100, 771, 0x00FEDC,
 		"|C|U|R|R|E|N|T|");
-	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1100, 522, 0x00FEDC,
+	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1100, 782, 0x00FEDC,
 		"+-+-+-+-+-+-+-+");
-	if (tmp->type == 0)
-		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1110, 600, 0x00FEDC, "Plane");
-	else if (tmp->type == 1)
-		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1110, 600, 0x00FEDC, "Sphere");
-	else if (tmp->type == 2)
-		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1110, 600, 0x00FEDC, "Cylinder");
-	else if (tmp->type == 3)
-		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1110, 600, 0x00FEDC, "Cone");
-	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1110, 625, 0x00FEDC,
-		ft_strjoin("pos  : ", (ft_strjoin(ft_ftoa(tmp->pos.x), \
-			(ft_strjoin(" ", (ft_strjoin(ft_ftoa(tmp->pos.y), (ft_strjoin(" ", \
-			ft_ftoa(tmp->pos.z)))))))))));
-	if (tmp->type == 0 || tmp->type == 2 || tmp->type == 3)
-		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1110, 650, 0x00FEDC,
-			ft_strjoin("rot  : ", (ft_strjoin(ft_ftoa(tmp->rot.x), \
-			(ft_strjoin(" ", (ft_strjoin(ft_ftoa(tmp->rot.y), (ft_strjoin(" ", \
-			ft_ftoa(tmp->rot.z)))))))))));
-	if (tmp->type == 2 || tmp->type == 3)
-		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1110, 675, 0x00FEDC,
-			ft_strjoin("size : ", ft_ftoa(tmp->size)));
-	else if (tmp->type == 1)
-		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1110, 650, 0x00FEDC,
-			ft_strjoin("size : ", ft_ftoa(tmp->size)));
+	if (rt->tmp->type == 0)
+		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1130, 832, 0x00FEDC, "Plane");
+	else if (rt->tmp->type == 1)
+		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1130, 832, 0x00FEDC, "Sphere");
+	else if (rt->tmp->type == 2)
+		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1130, 832, 0x00FEDC, "Cylinder");
+	else if (rt->tmp->type == 3)
+		PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1130, 832, 0x00FEDC, "Cone");
 }

@@ -6,7 +6,7 @@
 /*   By: rlossy <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/19 17:28:31 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/13 14:40:56 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/14 16:23:12 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,7 @@
 # define MAX_W 1000
 # define THREADS 8
 # define FOV 2.0
+# define TMP rt->tmp
 # define R1 rt->matrix.r1
 # define R2 rt->matrix.r2
 # define R3 rt->matrix.r3
@@ -147,6 +148,8 @@ typedef struct		s_mlx
 **	th		=	number of thread
 **	aax		=	x storage for anti-aliasing
 **	aay		=	y storage for anti-aliasing
+**	select	=	boolean to know if select mode is active or not
+**	*s		=	string for display
 **	aa		=	anti-aliasing value
 **	t1		=	first solution of equation
 **	t2		=	second solution of equation
@@ -158,7 +161,9 @@ typedef struct		s_mlx
 **	col		=	temporary color coefficient
 **	rgb		=	final color coefficient
 **	*cur	=	list to work on current object
+**	*tmp	=	object selected in live
 **	*objs	=	list of objects from parsing
+**	center	=	object center in case of cone or cylinder
 **	light	=	light structure
 **	matrix	=	matrix used for event
 */
@@ -168,8 +173,8 @@ typedef struct		s_env
 	int				th;
 	int				aax;
 	int				aay;
-	int				zoom;
 	int				select;
+	char			*s;
 	double			aa;
 	double			t1;
 	double			t2;
@@ -181,6 +186,7 @@ typedef struct		s_env
 	t_vec			col;
 	t_vec			rgb;
 	t_obj			*cur;
+	t_obj			*tmp;
 	t_obj			*objs;
 	t_vec			center;
 	t_light			light;
@@ -191,10 +197,11 @@ typedef struct		s_env
 **  Initialize environment.
 */
 
-void				ft_initialization(t_env *rt, int scene);
 int					ft_env_init(t_env *rt);
 int					ft_create(t_env *rt);
+void				ft_initialization(t_env *rt, int scene);
 void				ft_launch(t_env *rt, int mode);
+void				ft_quit(t_obj *objs);
 
 /*
 **  Functions that take care of tracing.
@@ -261,14 +268,23 @@ t_vec				ft_lambert(t_obj *obj, t_vec *pos, t_vec *normal);
 double				ft_phong(t_env *rt, t_obj *obj, t_vec *pos);
 
 /*
-**  Functions that take care of events.
+**  Functions that take care of keyboard events.
 */
 
 int					ft_getting_keys(int key, t_env *rt);
 void				ft_rotate(int key, t_env *rt);
 void				ft_moove(int key, t_env *rt);
+void				ft_live(int key, t_env *rt);
+void				ft_live_next(int key, t_env *rt, double tmp);
+
+/*
+**	Functions that take care of mouse events
+*/
+
 int					ft_mouse(int button, int x, int y, t_env *rt);
+int					ft_mouse_next(t_env *rt);
 void				ft_zoom(int button, int x, int y, t_env *rt);
+void				ft_live_zoom(int button, int x, int y, t_env *rt);
 t_obj				*ft_select(t_vec pos, double x, double y, t_env *rt);
 
 /*
@@ -277,6 +293,23 @@ t_obj				*ft_select(t_vec pos, double x, double y, t_env *rt);
 
 void				ft_display(t_env *rt);
 void				ft_header(t_env *rt);
-void				ft_obj_infos(t_env *rt, t_obj *tmp);
+void				ft_cam_infos(t_env	*rt);
+void				ft_obj_infos(t_env *rt);
+void				ft_footer(t_env *rt);
+
+/*
+**	Functions that describe scenes
+*/
+
+void				ft_first(t_env *rt);
+void				ft_second(t_env *rt);
+void				ft_third(t_env *rt);
+void				ft_fourth(t_env *rt);
+void				ft_fifth(t_env *rt);
+void				ft_sixth(t_env *rt);
+void				ft_sixth_next(t_env *rt);
+void				ft_seventh(t_env *rt);
+void				ft_eighth(t_env *rt);
+void				ft_eighth_next(t_env *rt);
 
 #endif

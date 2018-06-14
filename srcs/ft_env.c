@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/03 12:29:53 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/13 11:59:31 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/14 10:02:01 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,7 +23,6 @@ int		ft_env_init(t_env *rt)
 	rt->mlx.win = mlx_new_window(rt->mlx.mlx_ptr, MAX_W + 350, MAX_H, "RTv1");
 	rt->nb_spot = 1.0 / rt->nb_spot;
 	mlx_expose_hook(rt->mlx.win, ft_create, rt);
-//	mlx_hook(rt->mlx.win, MOTION, 0, ft_motion, rt);
 	mlx_hook(rt->mlx.win, 2, 0, ft_getting_keys, rt);
 	mlx_mouse_hook(rt->mlx.win, ft_mouse, rt);
 	mlx_loop(rt->mlx.mlx_ptr);
@@ -40,9 +39,9 @@ int		ft_create(t_env *rt)
 	rt->mlx.img.data = mlx_get_data_addr(rt->mlx.img.img_ptr, &rt->mlx.img.bpp,\
 	&rt->mlx.img.size_l, &rt->mlx.img.endian);
 	init_thread(rt);
+	ft_display(rt);
 	mlx_put_image_to_window(rt->mlx.mlx_ptr, rt->mlx.win, rt->mlx.img.img_ptr, \
 	0, 0);
-	ft_display(rt);
 	return (0);
 }
 
