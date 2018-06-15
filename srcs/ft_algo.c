@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/17 13:58:26 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/12 16:17:28 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/15 09:51:29 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,8 +51,8 @@ double	ft_phong(t_env *rt, t_obj *obj, t_vec *pos)
 	ft_vnorm(&lite);
 	reflect = ft_vreflect(&rt->ray.dir, &rt->light.normal);
 	ft_vnorm(&reflect);
-	phong = ft_reg(pow(ft_reg(ft_vdot(&reflect, &lite), 0.0, 1.0), 50.0), \
-	0.0, 1.0);
+	phong = ft_reg(pow(ft_reg(ft_vdot(&reflect, &lite), 0.0, 1.0), 50.0),
+			0.0, 1.0);
 	phong *= pow(obj->pow, 0.5);
 	return (phong);
 }

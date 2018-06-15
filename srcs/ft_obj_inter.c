@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/16 16:17:15 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/12 14:32:54 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/15 09:51:29 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,8 +22,8 @@ double	ft_interplane(t_env *rt, t_obj *obj)
 {
 	double	t;
 
-	t = -((ft_vdot(&obj->rot, &rt->ray.ori) - ft_vdot(&obj->rot, &obj->pos)) / \
-	ft_vdot(&obj->rot, &rt->ray.dir));
+	t = -((ft_vdot(&obj->rot, &rt->ray.ori) - ft_vdot(&obj->rot, &obj->pos)) /
+			ft_vdot(&obj->rot, &rt->ray.dir));
 	if (t < 0.001)
 		return (-1.0);
 	return (t);
@@ -66,12 +66,12 @@ double	ft_intercylinder(t_env *rt, t_obj *obj)
 
 	rt->center = ft_vsub(&rt->ray.ori, &obj->pos);
 	ft_vnorm(&obj->rot);
-	a = ft_vdot(&rt->ray.dir, &rt->ray.dir) - pow(ft_vdot(&rt->ray.dir, \
-	&obj->rot), 2);
-	b = 2 * (ft_vdot(&rt->ray.dir, &rt->center) - \
-	(ft_vdot(&rt->ray.dir, &obj->rot) * ft_vdot(&rt->center, &obj->rot)));
-	c = ft_vdot(&rt->center, &rt->center) - \
-	pow(ft_vdot(&rt->center, &obj->rot), 2) - pow(obj->size, 2);
+	a = ft_vdot(&rt->ray.dir, &rt->ray.dir) - pow(ft_vdot(&rt->ray.dir,
+				&obj->rot), 2);
+	b = 2 * (ft_vdot(&rt->ray.dir, &rt->center) -
+		(ft_vdot(&rt->ray.dir, &obj->rot) * ft_vdot(&rt->center, &obj->rot)));
+	c = ft_vdot(&rt->center, &rt->center) -
+		pow(ft_vdot(&rt->center, &obj->rot), 2) - pow(obj->size, 2);
 	d = b * b - 4 * a * c;
 	if (d < 0.001)
 		return (-1.0);
@@ -96,12 +96,12 @@ double	ft_intercone(t_env *rt, t_obj *obj)
 
 	rt->center = ft_vsub(&rt->ray.ori, &obj->pos);
 	ft_vnorm(&obj->rot);
-	a = ft_vdot(&rt->ray.dir, &rt->ray.dir) - (1 + pow(tan(obj->size), 2)) * \
-	pow(ft_vdot(&rt->ray.dir, &obj->rot), 2);
+	a = ft_vdot(&rt->ray.dir, &rt->ray.dir) - (1 + pow(tan(obj->size), 2)) *
+		pow(ft_vdot(&rt->ray.dir, &obj->rot), 2);
 	b = 2 * (ft_vdot(&rt->ray.dir, &rt->center) - (1 + pow(tan(obj->size), 2)) *
-	ft_vdot(&rt->ray.dir, &obj->rot) * ft_vdot(&rt->center, &obj->rot));
-	c = ft_vdot(&rt->center, &rt->center) - (1 + \
-	pow(tan(obj->size), 2)) * pow(ft_vdot(&rt->center, &obj->rot), 2);
+			ft_vdot(&rt->ray.dir, &obj->rot) * ft_vdot(&rt->center, &obj->rot));
+	c = ft_vdot(&rt->center, &rt->center) - (1 +
+			pow(tan(obj->size), 2)) * pow(ft_vdot(&rt->center, &obj->rot), 2);
 	d = b * b - 4 * a * c;
 	if (d < 0.001)
 		return (-1.0);

@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/13 10:41:36 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/14 15:45:35 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/15 09:52:47 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -96,13 +96,13 @@ void		ft_cam_infos(t_env *rt)
 		"| +---+ | +---+ | +---+ |");
 	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1050, 585, 0x800080,
 		"|/_____\\|/_____\\|/_____\\|");
-	rt->s = ft_strjoin("ori  : ", (ft_strjoin(ft_ftoa(rt->cam.ori.x), \
-			(ft_strjoin(" ", (ft_strjoin(ft_ftoa(rt->cam.ori.y), \
+	rt->s = ft_strjoin("ori  : ", (ft_strjoin(ft_ftoa(rt->cam.ori.x),
+			(ft_strjoin(" ", (ft_strjoin(ft_ftoa(rt->cam.ori.y),
 			(ft_strjoin(" ", ft_ftoa(rt->cam.ori.z), 2)), 3)), 2)), 3)), 2);
 	free(rt->s);
 	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1075, 635, 0x800080, rt->s);
-	rt->s = ft_strjoin("dir  : ", (ft_strjoin(ft_ftoa(rt->cam.dir.x), \
-			(ft_strjoin(" ", (ft_strjoin(ft_ftoa(rt->cam.dir.y), \
+	rt->s = ft_strjoin("dir  : ", (ft_strjoin(ft_ftoa(rt->cam.dir.x),
+			(ft_strjoin(" ", (ft_strjoin(ft_ftoa(rt->cam.dir.y),
 			(ft_strjoin(" ", ft_ftoa(rt->cam.dir.z), 2)), 3)), 2)), 3)), 2);
 	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1075, 660, 0x800080, rt->s);
 	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1000, 710, 0xffa500,

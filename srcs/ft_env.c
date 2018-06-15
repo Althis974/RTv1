@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/03 12:29:53 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/14 10:02:01 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/15 09:51:29 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,12 +36,12 @@ int		ft_env_init(t_env *rt)
 int		ft_create(t_env *rt)
 {
 	rt->mlx.img.img_ptr = mlx_new_image(rt->mlx.mlx_ptr, MAX_W, MAX_H);
-	rt->mlx.img.data = mlx_get_data_addr(rt->mlx.img.img_ptr, &rt->mlx.img.bpp,\
-	&rt->mlx.img.size_l, &rt->mlx.img.endian);
+	rt->mlx.img.data = mlx_get_data_addr(rt->mlx.img.img_ptr, &rt->mlx.img.bpp,
+			&rt->mlx.img.size_l, &rt->mlx.img.endian);
 	init_thread(rt);
 	ft_display(rt);
-	mlx_put_image_to_window(rt->mlx.mlx_ptr, rt->mlx.win, rt->mlx.img.img_ptr, \
-	0, 0);
+	mlx_put_image_to_window(rt->mlx.mlx_ptr, rt->mlx.win, rt->mlx.img.img_ptr,
+			0, 0);
 	return (0);
 }
 

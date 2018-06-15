@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/17 16:39:34 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/14 16:19:22 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/15 09:51:29 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -83,27 +83,26 @@ void	ft_moove(int key, t_env *rt)
 {
 	if (key == UP)
 	{
-		CAMD = (t_vec){CAMD.x + 5.0 * R3.x, CAMD.y + 5.0 * R3.y, \
-		CAMD.z + 5.0 * R3.z};
+		CAMD = (t_vec){CAMD.x + 5.0 * R3.x, CAMD.y + 5.0 * R3.y,
+			CAMD.z + 5.0 * R3.z};
 		CAMO = (t_vec){CAMX + 5.0 * R3.x, CAMY + 5.0 * R3.y, CAMZ - 5.0 * R3.z};
 	}
 	else if (key == LEFT)
 	{
-		CAMD = (t_vec){CAMD.x + 5.0 * R2.x, CAMD.y + 5.0 * R2.y, \
-		CAMD.z + 5.0 * R2.z};
+		CAMD = (t_vec){CAMD.x + 5.0 * R2.x, CAMD.y + 5.0 * R2.y,
+			CAMD.z + 5.0 * R2.z};
 		CAMO = (t_vec){CAMX + 5.0 * R2.x, CAMY + 5.0 * R2.y, CAMZ + 5.0 * R2.z};
 	}
 	else if (key == DOWN)
 	{
-		CAMD = (t_vec){CAMD.x - 5.0 * R3.x, CAMD.y - 5.0 * R3.y, \
-		CAMD.z - 5.0 * R3.z};
-		CAMO = (t_vec){CAMX - 5.0 * R3.x, CAMY - 5.0 * R3.y, \
-		CAMZ - 5.0 * R3.z};
+		CAMD = (t_vec){CAMD.x - 5.0 * R3.x, CAMD.y - 5.0 * R3.y,
+			CAMD.z - 5.0 * R3.z};
+		CAMO = (t_vec){CAMX - 5.0 * R3.x, CAMY - 5.0 * R3.y, CAMZ - 5.0 * R3.z};
 	}
 	else if (key == RIGHT)
 	{
-		CAMD = (t_vec){CAMD.x - 5.0 * R2.x, CAMD.y - 5.0 * R2.y, \
-		CAMD.z - 5.0 * R2.z};
+		CAMD = (t_vec){CAMD.x - 5.0 * R2.x, CAMD.y - 5.0 * R2.y,
+			CAMD.z - 5.0 * R2.z};
 		CAMO = (t_vec){CAMX - 5.0 * R2.x, CAMY - 5.0 * R2.y, CAMZ - 5.0 * R2.z};
 	}
 }
@@ -117,17 +116,17 @@ void	ft_live(int key, t_env *rt)
 	double	tmp;
 
 	if (key == UP)
-		TMP->pos = (t_vec){TMP->pos.x + 5.0 * R2.x, TMP->pos.y + 5.0 * R2.y, \
-		TMP->pos.z + 5.0 * R2.z};
+		TMP->pos = (t_vec){TMP->pos.x + 5.0 * R2.x, TMP->pos.y + 5.0 * R2.y,
+			TMP->pos.z + 5.0 * R2.z};
 	else if (key == LEFT)
-		TMP->pos = (t_vec){TMP->pos.x + 5.0 * R2.x, TMP->pos.y + 5.0 * R2.y, \
-		TMP->pos.z + 5.0 * R2.z};
+		TMP->pos = (t_vec){TMP->pos.x + 5.0 * R2.x, TMP->pos.y + 5.0 * R2.y,
+			TMP->pos.z + 5.0 * R2.z};
 	else if (key == DOWN)
-		TMP->pos = (t_vec){TMP->pos.x - 5.0 * R2.x, TMP->pos.y - 5.0 * R2.y, \
-		TMP->pos.z - 5.0 * R2.z};
+		TMP->pos = (t_vec){TMP->pos.x - 5.0 * R2.x, TMP->pos.y - 5.0 * R2.y,
+			TMP->pos.z - 5.0 * R2.z};
 	else if (key == RIGHT)
-		TMP->pos = (t_vec){TMP->pos.x - 5.0 * R2.x, TMP->pos.y - 5.0 * R2.y, \
-		TMP->pos.z - 5.0 * R2.z};
+		TMP->pos = (t_vec){TMP->pos.x - 5.0 * R2.x, TMP->pos.y - 5.0 * R2.y,
+			TMP->pos.z - 5.0 * R2.z};
 	if (key == Q && (tmp = TMP->rot.x) < 1000.0)
 	{
 		TMP->rot.x = TMP->rot.x * cosf(0.5) + TMP->rot.y * (-sinf(0.5));

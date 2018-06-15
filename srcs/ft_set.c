@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/14 14:55:20 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/12 14:32:54 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/15 09:51:29 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,7 +32,7 @@ void	ft_set_cam(t_env *rt, double x, double y)
 	v2 = ft_vcross(&v1, &(t_vec){0.0, 1.0, 0.0});
 	ft_vnorm(&v2);
 	v3 = ft_vcross(&v2, &v1);
-	rt->ray.dir = (t_vec){u * v2.x + v * v3.x + FOV * v1.x, u * v2.y + v * \
+	rt->ray.dir = (t_vec){u * v2.x + v * v3.x + FOV * v1.x, u * v2.y + v *
 		v3.y + FOV * v1.y, u * v2.z + v * v3.z + FOV * v1.z};
 	rt->ray.ori = rt->cam.ori;
 }
@@ -51,8 +51,8 @@ void	ft_set_normal(t_env *rt, t_vec *pos)
 		rt->light.normal = ft_vsub(pos, &rt->objs->pos);
 	else if (rt->objs->type == 2 || rt->objs->type == 3)
 	{
-		tmp = ft_vmulx(&rt->objs->rot, (ft_vdot(&rt->ray.dir, &rt->objs->rot) *\
-		rt->t1 + ft_vdot(&rt->center, &rt->objs->rot)));
+		tmp = ft_vmulx(&rt->objs->rot, (ft_vdot(&rt->ray.dir, &rt->objs->rot) *
+					rt->t1 + ft_vdot(&rt->center, &rt->objs->rot)));
 		if (rt->objs->type == 3)
 			tmp = ft_vmulx(&tmp, (1 + pow(tan(rt->objs->size), 2)));
 		tmp2 = ft_vsub(pos, &rt->objs->pos);

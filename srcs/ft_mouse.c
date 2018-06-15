@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/11 12:49:34 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/14 16:28:27 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/15 09:51:29 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,8 +31,8 @@ int		ft_mouse(int button, int x, int y, t_env *rt)
 		ft_zoom(button, x, y, rt);
 	else if (button == 1 && (x >= 0 && x <= MAX_W) && (y >= 0 && y <= MAX_H))
 	{
-		if ((rt->tmp = ft_select((t_vec){CAMX + tmpx, CAMY + tmpy, CAMZ}, \
-		tmpx, tmpy, rt)) == NULL)
+		if ((rt->tmp = ft_select((t_vec){CAMX + tmpx, CAMY + tmpy, CAMZ},
+						tmpx, tmpy, rt)) == NULL)
 			return (ft_mouse_next(rt));
 		ft_obj_infos(rt);
 		rt->select = 1;
@@ -111,8 +111,8 @@ t_obj	*ft_select(t_vec pos, double x, double y, t_env *rt)
 	R2 = ft_vcross(&R1, &(t_vec){0.0, 1.0, 0.0});
 	ft_vnorm(&R2);
 	R3 = ft_vcross(&R2, &R1);
-	rt->ray.dir = (t_vec){x * R2.x + y * R3.x + FOV * R1.x, x * R2.y + y * \
-	R3.y + FOV * R1.y, x * R2.z + y * R3.z + FOV * R1.z};
+	rt->ray.dir = (t_vec){x * R2.x + y * R3.x + FOV * R1.x, x * R2.y + y *
+		R3.y + FOV * R1.y, x * R2.z + y * R3.z + FOV * R1.z};
 	ft_vnorm(&rt->ray.dir);
 	tenv = rt;
 	tenv->ray.ori = pos;
