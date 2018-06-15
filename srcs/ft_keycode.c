@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/17 16:39:34 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/15 09:51:29 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/15 09:51:38 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@
 int		ft_getting_keys(int key, t_env *rt)
 {
 	if (key == ESC)
-		ft_quit(rt->cur);
+		ft_quit(rt, rt->cur);
 	if (rt->select == 1)
 	{
 		ft_live(key, rt);

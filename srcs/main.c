@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/20 11:50:57 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/14 16:21:55 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/15 11:25:32 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@
 **	Free objs and quit
 */
 
-void	ft_quit(t_obj *objs)
+void	ft_quit(t_env *rt, t_obj *objs)
 {
 	t_obj	*tmp;
 	t_obj	*next;
@@ -29,6 +29,9 @@ void	ft_quit(t_obj *objs)
 		free(tmp);
 		tmp = next;
 	}
+	mlx_destroy_image(rt->mlx.mlx_ptr, rt->mlx.img.img_ptr);
+	mlx_clear_window(rt->mlx.mlx_ptr, rt->mlx.win);
+	mlx_destroy_window(rt->mlx.mlx_ptr, rt->mlx.win);
 	exit(0);
 }
 

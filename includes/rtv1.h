@@ -201,7 +201,7 @@ int					ft_env_init(t_env *rt);
 int					ft_create(t_env *rt);
 void				ft_initialization(t_env *rt, int scene);
 void				ft_launch(t_env *rt, int mode);
-void				ft_quit(t_obj *objs);
+void				ft_quit(t_env *rt, t_obj *objs);
 
 /*
 **  Functions that take care of tracing.
