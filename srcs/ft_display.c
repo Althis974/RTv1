@@ -6,7 +6,7 @@
 /*   By: rlossy <rlossy@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/13 10:41:36 by rlossy       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/15 09:52:47 by rlossy      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/19 15:05:45 by rlossy      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -99,8 +99,8 @@ void		ft_cam_infos(t_env *rt)
 	rt->s = ft_strjoin("ori  : ", (ft_strjoin(ft_ftoa(rt->cam.ori.x),
 			(ft_strjoin(" ", (ft_strjoin(ft_ftoa(rt->cam.ori.y),
 			(ft_strjoin(" ", ft_ftoa(rt->cam.ori.z), 2)), 3)), 2)), 3)), 2);
-	free(rt->s);
 	PUT(rt->mlx.mlx_ptr, rt->mlx.win, 1075, 635, 0x800080, rt->s);
+	free(rt->s);
 	rt->s = ft_strjoin("dir  : ", (ft_strjoin(ft_ftoa(rt->cam.dir.x),
 			(ft_strjoin(" ", (ft_strjoin(ft_ftoa(rt->cam.dir.y),
 			(ft_strjoin(" ", ft_ftoa(rt->cam.dir.z), 2)), 3)), 2)), 3)), 2);
