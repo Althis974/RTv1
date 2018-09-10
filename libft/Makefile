@@ -20,8 +20,8 @@ FILENAMES	+=	ft_putendl_fd.c ft_putnbr.c ft_putnbr_fd.c ft_putstr.c
 FILENAMES	+=	ft_putstr_fd.c	ft_strcat.c	ft_strchr.c ft_strclr.c ft_strcmp.c
 FILENAMES	+=	ft_strcpy.c ft_strdel.c ft_strdup.c ft_strequ.c ft_striter.c
 FILENAMES	+=	ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlen.c ft_strmap.c
-FILENAMES	+=	ft_strmapi.c ft_strncat.c ft_strncmp.c ft_strncpy.c 
-FILENAMES	+=	ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c 
+FILENAMES	+=	ft_strmapi.c ft_strncat.c ft_strncmp.c ft_strncpy.c
+FILENAMES	+=	ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c
 FILENAMES	+=	ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c
 FILENAMES	+=	ft_toupper.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c
 FILENAMES	+=	ft_lstiter.c ft_lstmap.c ft_str_is_alpha.c ft_str_is_numeric.c
@@ -52,19 +52,19 @@ all: $(NAME)
 
 clean:
 		@echo "\033[31m"
-		@sh $(LOADF) $@ r n $(NAME)
+		@sh $(LOADF) $(LOADIR) $@ r n $(NAME)
 		@rm -rf build/
 		@printf "\n\033[1m\033[34m\t\t\t\t⥷ $(NAME)⭃\tObject Files\033[0m \
 		\033[1m⟿ \t\033[31mDeletion Success\033[0m ✅\n"
 
 fclean: clean
 		@echo "\033[31m"
-		@sh $(LOADF) $@ r n $(NAME)
+		@sh $(LOADF) $(LOADIR) $@ r n $(NAME)
 		@rm -f $(NAME)
 		@printf "\n\033[1m\033[34m\t\t\t\t⥷ $(NAME)⭃\tCompiled Files\033[0m \
 		\033[1m⟿ \t\033[31mDeletion Success\033[0m ✅\n"
 
-re: 
+re:
 	@$(MAKE) fclean
 	@$(MAKE) all
 
@@ -76,12 +76,12 @@ $(NAME): $(OBJECTS)
 		@printf "\n\033[1m\033[34m\t\t\t\t⥷ $(NAME)⭃\tObject Files\033[0m \
 		\033[1m⟿ \t\033[32mCreation Success\033[0m ✅\n"
 		@echo "\033[43m\033[30m"
-		@sh $(LOADF) $@ a n
+		@sh $(LOADF) $(LOADIR) $@ a n
 		@echo "\033[0m"
 		@ar crs $@ $(OBJECTS)
 		@printf "\n\033[1m\033[34m\t\t\t\t⥷ $@⭃ \tProject\t\t\033[0m\033[1m⟿ \
 		\033[32mCreation Success\033[0m ✅\n"
 
 build/%.o: ./%.c $(HEADER) | build
-		@sh $(LOADF) $< o y
+		@sh $(LOADF) $(LOADIR) $< o y
 		@gcc -Wall -Wextra -Werror -I $(HEADER) -c $< -o $@
