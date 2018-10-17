@@ -34,7 +34,7 @@ make
    </tr>
    <tr>
        <td>RIGHT CLICK</td>
-       <td>Déselectionner objet</td>
+       <td>Désélectionner objet</td>
    </tr>
      <tr>
        <td>UP</td>
