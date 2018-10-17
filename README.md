@@ -38,31 +38,31 @@ make
    </tr>
      <tr>
        <td>UP</td>
-       <td>Déplacer camera / objet vers le haut</td>
+       <td>Déplacer caméra / objet vers le haut</td>
    </tr>
      <tr>
        <td>LEFT</td>
-       <td>Déplacer camera / objet vers la gauche</td>
+       <td>Déplacer caméra / objet vers la gauche</td>
    </tr>
      <tr>
        <td>DOWN</td>
-       <td>Déplacer camera / objet vers le bas</td>
+       <td>Déplacer caméra / objet vers le bas</td>
    </tr>
      <tr>
        <td>RIGHT</td>
-       <td>Déplacer camera / objet vers la droite</td>
+       <td>Déplacer caméra / objet vers la droite</td>
    </tr>
      <tr>
        <td>W / S</td>
-       <td>Pivoter camera / objet sur l'axe Y</td>
+       <td>Pivoter caméra / objet sur l'axe Y</td>
    </tr>
        <tr>
        <td>A / D</td>
-       <td>Pivoter camera / objet sur l'axe X</td>
+       <td>Pivoter caméra / objet sur l'axe X</td>
    </tr>
        <tr>
        <td>SCROLL UP / SCROLL DOWN</td>
-       <td>Pivoter camera / objet sur l'axe Z</td>
+       <td>Pivoter caméra / objet sur l'axe Z</td>
    </tr>
      </tr>
        <tr>
