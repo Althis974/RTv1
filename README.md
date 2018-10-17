@@ -52,13 +52,13 @@ make
        <td>RIGHT</td>
        <td>Déplacer caméra / objet vers la droite</td>
    </tr>
-     <tr>
-       <td>W / S</td>
-       <td>Pivoter caméra / objet sur l'axe Y</td>
-   </tr>
        <tr>
        <td>A / D</td>
        <td>Pivoter caméra / objet sur l'axe X</td>
+   </tr>
+       <tr>
+       <td>W / S</td>
+       <td>Pivoter caméra / objet sur l'axe Y</td>
    </tr>
        <tr>
        <td>SCROLL UP / SCROLL DOWN</td>
