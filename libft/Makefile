@@ -41,7 +41,7 @@ FILENAMES   +=  ft_ftoa.c
 SOURCES     =   $(addprefix ./, $(FILENAMES))
 OBJECTS     =   $(addprefix build/, $(FILENAMES:.c=.o))
 
-LOADIR		=	/Users/rlossy/extra/Progress_Bar-for-Makefile
+LOADIR		=	../extra/Progress_Bar-for-Makefile
 LOADF		=	$(LOADIR)/loading.sh
 
 .PHONY: all clean fclean re

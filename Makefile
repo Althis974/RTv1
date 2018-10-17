@@ -34,7 +34,7 @@ LIBX_INC	=	-I $(LX_FT)/mlx.h
 FLAGS		=	-Wall -Wextra -Werror -O2
 FLAGX		=	-framework OpenGL -framework AppKit
 
-LOADIR		=	/Users/rlossy/extra/Progress_Bar-for-Makefile
+LOADIR		=	./extra/Progress_Bar-for-Makefile
 LOADF		=	$(LOADIR)/loading.sh
 
 .PHONY: all clean fclean re
