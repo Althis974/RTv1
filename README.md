@@ -36,41 +36,39 @@ make
        <td>RIGHT CLICK</td>
        <td>Désélectionner objet</td>
    </tr>
-     <tr>
+   <tr>
        <td>UP</td>
        <td>Déplacer caméra / objet vers le haut</td>
    </tr>
-     <tr>
+   <tr>
        <td>LEFT</td>
        <td>Déplacer caméra / objet vers la gauche</td>
    </tr>
-     <tr>
+   <tr>
        <td>DOWN</td>
        <td>Déplacer caméra / objet vers le bas</td>
    </tr>
-     <tr>
+   <tr>
        <td>RIGHT</td>
        <td>Déplacer caméra / objet vers la droite</td>
    </tr>
-       <tr>
+   <tr>
        <td>A / D</td>
        <td>Pivoter caméra / objet sur l'axe X</td>
    </tr>
-       <tr>
+   <tr>
        <td>W / S</td>
        <td>Pivoter caméra / objet sur l'axe Y</td>
    </tr>
-       <tr>
+   <tr>
        <td>SCROLL UP / SCROLL DOWN</td>
        <td>Pivoter caméra / objet sur l'axe Z</td>
    </tr>
-     </tr>
-       <tr>
+   <tr>
        <td>+ / -</td>
        <td>Faire varier l'anti-aliasing</td>
    </tr>
-        </tr>
-       <tr>
+   <tr>
        <td>ESC</td>
        <td>Quitter le programme</td>
    </tr>
