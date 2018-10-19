@@ -54,7 +54,7 @@ make
    </tr>
    <tr>
        <td>SCROLL UP</td>
-       <td>Déplacer caméra / objet vers le fond</td>
+       <td>Déplacer caméra / objet vers l'arrière</td>
    </tr>
    <tr>
        <td>SCROLL DOWN</td>
